@@ -703,39 +703,43 @@
             font-size: 1.1rem;
         }
 
-          .project-gallery {
-    width: 100%;
-    overflow-x: auto;
-    padding: 20px 0;
-  }
-  
-  .image-scroll-container {
+        .carousel {
+    position: relative;
+    max-width: 100%;
+    overflow: hidden;
     display: flex;
-    gap: 15px;
-    padding: 10px;
+    align-items: center;
   }
   
-  .image-scroll-container img {
-    height: 300px; /* Fixed height */
-    width: auto; /* Maintain aspect ratio */
+  .carousel-track {
+    display: flex;
+    gap: 20px;
+    transition: transform 0.5s ease;
+    padding: 20px;
+    overflow-x: auto;
+    scroll-behavior: smooth;
+  }
+  
+  .carousel-image {
+    height: 350px;
+    width: auto;
     border-radius: 8px;
-    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
-    transition: transform 0.3s ease;
+    object-fit: contain;
   }
   
-  .image-scroll-container img:hover {
-    transform: scale(1.03);
+  .carousel-button {
+    position: absolute;
+    z-index: 2;
+    background: rgba(0,0,0,0.5);
+    color: white;
+    border: none;
+    padding: 20px 10px;
+    cursor: pointer;
+    font-size: 24px;
   }
   
-  /* Hide scrollbar but keep functionality */
-  .project-gallery::-webkit-scrollbar {
-    height: 8px;
-  }
-  
-  .project-gallery::-webkit-scrollbar-thumb {
-    background: #888;
-    border-radius: 4px;
-  }
+  .prev { left: 0; }
+  .next { right: 0; }
         
         /* Contact Section */
         .contact-container {
@@ -1320,15 +1324,20 @@
 
                 <div class="project-card animate fade-in delay-1">
                    <div class="project-gallery">
-  <div class="image-scroll-container">
-    <img src="new-folder/Road Accident/Main Sheet.png" alt="Road Accident Dashboard 1">
-    <img src="new-folder/Road Accident/Accident Analysis.png" alt="Road Accident Dashboard 2">
-    <img src="new-folder/Road Accident/Driver Analysis.png" alt="Road Accident Dashboard 3">
-    <img src="new-folder/Road Accident/Location Analysis.png" alt="Road Accident Dashboard 4">
-    <img src="new-folder/Road Accident/Road Analysis.png" alt="Road Accident Dashboard 5">
-    <img src="new-folder/Road Accident/Time Analysis.png" alt="Road Accident Dashboard 6">
-    <img src="new-folder/Road Accident/Weather Analysis.png" alt="Road Accident Dashboard 7">
+<div class="carousel">
+  <button class="carousel-button prev">‹</button>
+  <div class="carousel-track">
+    <img src="new-folder/Road Accident/Main Sheet.png" alt="Main Dashboard Overview" class="carousel-image">
+    <img src="new-folder/Road Accident/Accident Analysis.png" alt="Accident Type Analysis" class="carousel-image">
+    <img src="new-folder/Road Accident/Driver Analysis.png" alt="Driver Demographic Analysis" class="carousel-image">
+    <img src="new-folder/Road Accident/Location Analysis.png" alt="Accident Location Heatmap" class="carousel-image">
+    <img src="new-folder/Road Accident/Road Analysis.png" alt="Road Condition Statistics" class="carousel-image">
+    <img src="new-folder/Road Accident/Time Analysis.png" alt="Time-Based Accident Patterns" class="carousel-image">
+    <img src="new-folder/Road Accident/Weather Analysis.png" alt="Weather Impact Analysis" class="carousel-image">
+    <img src="new-folder/Road Accident/Victim Analysis.png" alt="Victim Statistics" class="carousel-image">
+    <img src="new-folder/Road Accident/Vehicle Type Analysis.png" alt="Vehicle Type Breakdown" class="carousel-image">
   </div>
+  <button class="carousel-button next">›</button>
 </div>
                     <div class="project-content">
                         <h3>Road Accident Analysis</h3>
