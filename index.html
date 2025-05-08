@@ -702,6 +702,40 @@
         .project-links a i {
             font-size: 1.1rem;
         }
+
+          .project-gallery {
+    width: 100%;
+    overflow-x: auto;
+    padding: 20px 0;
+  }
+  
+  .image-scroll-container {
+    display: flex;
+    gap: 15px;
+    padding: 10px;
+  }
+  
+  .image-scroll-container img {
+    height: 300px; /* Fixed height */
+    width: auto; /* Maintain aspect ratio */
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+    transition: transform 0.3s ease;
+  }
+  
+  .image-scroll-container img:hover {
+    transform: scale(1.03);
+  }
+  
+  /* Hide scrollbar but keep functionality */
+  .project-gallery::-webkit-scrollbar {
+    height: 8px;
+  }
+  
+  .project-gallery::-webkit-scrollbar-thumb {
+    background: #888;
+    border-radius: 4px;
+  }
         
         /* Contact Section */
         .contact-container {
