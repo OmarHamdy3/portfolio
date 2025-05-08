@@ -1579,6 +1579,29 @@
             header.classList.remove('scrolled');
         }
     });
+
+
+      const track = document.querySelector('.carousel-track');
+    const images = document.querySelectorAll('.carousel-image');
+    const nextBtn = document.querySelector('.next');
+    const prevBtn = document.querySelector('.prev');
+    let currentIndex = 0;
+    
+    nextBtn.addEventListener('click', () => {
+      currentIndex = (currentIndex + 1) % images.length;
+      updateCarousel();
+    });
+    
+    prevBtn.addEventListener('click', () => {
+      currentIndex = (currentIndex - 1 + images.length) % images.length;
+      updateCarousel();
+    });
+    
+    function updateCarousel() {
+      const imageWidth = images[0].clientWidth + 20; // Include gap
+      track.style.transform = `translateX(-${currentIndex * imageWidth}px)`;
+    }
+    
 </script>
 </body>
 </html>
