@@ -702,44 +702,6 @@
         .project-links a i {
             font-size: 1.1rem;
         }
-
-        .carousel {
-    position: relative;
-    max-width: 100%;
-    overflow: hidden;
-    display: flex;
-    align-items: center;
-  }
-  
-  .carousel-track {
-    display: flex;
-    gap: 20px;
-    transition: transform 0.5s ease;
-    padding: 20px;
-    overflow-x: auto;
-    scroll-behavior: smooth;
-  }
-  
-  .carousel-image {
-    height: 350px;
-    width: auto;
-    border-radius: 8px;
-    object-fit: contain;
-  }
-  
-  .carousel-button {
-    position: absolute;
-    z-index: 2;
-    background: rgba(0,0,0,0.5);
-    color: white;
-    border: none;
-    padding: 20px 10px;
-    cursor: pointer;
-    font-size: 24px;
-  }
-  
-  .prev { left: 0; }
-  .next { right: 0; }
         
         /* Contact Section */
         .contact-container {
@@ -1323,22 +1285,15 @@
                 </div>
 
                 <div class="project-card animate fade-in delay-1">
-                   <div class="project-gallery">
-<div class="carousel">
-  <button class="carousel-button prev">‹</button>
-  <div class="carousel-track">
-    <img src="new-folder/Road Accident/Main Sheet.png" alt="Main Dashboard Overview" class="carousel-image">
-    <img src="new-folder/Road Accident/Accident Analysis.png" alt="Accident Type Analysis" class="carousel-image">
-    <img src="new-folder/Road Accident/Driver Analysis.png" alt="Driver Demographic Analysis" class="carousel-image">
-    <img src="new-folder/Road Accident/Location Analysis.png" alt="Accident Location Heatmap" class="carousel-image">
-    <img src="new-folder/Road Accident/Road Analysis.png" alt="Road Condition Statistics" class="carousel-image">
-    <img src="new-folder/Road Accident/Time Analysis.png" alt="Time-Based Accident Patterns" class="carousel-image">
-    <img src="new-folder/Road Accident/Weather Analysis.png" alt="Weather Impact Analysis" class="carousel-image">
-    <img src="new-folder/Road Accident/Victim Analysis.png" alt="Victim Statistics" class="carousel-image">
-    <img src="new-folder/Road Accident/Vehicle Type Analysis.png" alt="Vehicle Type Breakdown" class="carousel-image">
-  </div>
-  <button class="carousel-button next">›</button>
-</div>
+                    <div class="project-image">
+                        <img src="new-folder/Road Accident/Main Sheet.png" alt="Road Accident Dashboard 1">
+                        <img src="new-folder/Road Accident/Accident Analysis.png" alt="Road Accident Dashboard 2">
+                        <img src="new-folder/Road Accident/Driver Analysis.png" alt="Road Accident Dashboard 3">
+                        <img src="new-folder/Road Accident/Location Analysis.png" alt="Road Accident Dashboard 4">
+                        <img src="new-folder/Road Accident/Road Analysis.png" alt="Road Accident Dashboard 4">
+                        <img src="new-folder/Road Accident/Time Analysis.png" alt="Road Accident Dashboard 4">
+                        <img src="new-folder/Road Accident/Weather Analysis.png" alt="Road Accident Dashboard 4">
+                    </div>
                     <div class="project-content">
                         <h3>Road Accident Analysis</h3>
                         <p>Built Excel dashboards to explore accident data trends across locations, time, and causes for safety planning.</p>
@@ -1579,29 +1534,6 @@
             header.classList.remove('scrolled');
         }
     });
-
-
-      const track = document.querySelector('.carousel-track');
-    const images = document.querySelectorAll('.carousel-image');
-    const nextBtn = document.querySelector('.next');
-    const prevBtn = document.querySelector('.prev');
-    let currentIndex = 0;
-    
-    nextBtn.addEventListener('click', () => {
-      currentIndex = (currentIndex + 1) % images.length;
-      updateCarousel();
-    });
-    
-    prevBtn.addEventListener('click', () => {
-      currentIndex = (currentIndex - 1 + images.length) % images.length;
-      updateCarousel();
-    });
-    
-    function updateCarousel() {
-      const imageWidth = images[0].clientWidth + 20; // Include gap
-      track.style.transform = `translateX(-${currentIndex * imageWidth}px)`;
-    }
-    
 </script>
 </body>
 </html>
