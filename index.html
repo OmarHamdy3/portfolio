@@ -6,8 +6,7 @@
     <title>Omar Hamdy | Data Analyst Portfolio</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-
-  <!-- Main favicon links -->
+ <!-- Main favicon links -->
   <link rel="icon" type="image/png" href="new-folder/Images/analyst (3).png">
   
   <!-- Additional recommended formats -->
@@ -15,9 +14,9 @@
   
   <!-- Fallback for older browsers -->
   <link rel="shortcut icon" href="new-folder/Images/analyst (3).png">
+  
 
-
-    <style>
+  <style>
         :root {
             --primary: #fbed52;
             --secondary: #ff9d00;
@@ -150,6 +149,16 @@
             font-size: 1.5rem;
             color: var(--light);
             z-index: 1001;
+            position: relative;
+            width: 24px;
+            height: 24px;
+        }
+        
+        #menu-icon, #close-icon {
+            position: absolute;
+            top: 0;
+            left: 0;
+            transition: var(--transition);
         }
         
         /* Hero Section */
@@ -1151,7 +1160,8 @@
             <a href="#" class="logo"><i class="fas fa-chart-line"></i>Omar<span>Hamdy</span></a>
             <nav>
                 <div class="hamburger" id="hamburger">
-                    <i class="fas fa-bars"></i>
+                    <i class="fas fa-bars" id="menu-icon"></i>
+                    <i class="fas fa-times" id="close-icon" style="display: none;"></i>
                 </div>
                 <ul class="nav-links" id="navLinks">
                     <a href="#home">Home</a>
@@ -1186,9 +1196,10 @@
                     <a href="https://drive.google.com/file/d/165uvPYtBZP8rab4zxM_9Ee13_2Jn_EbQ/view?usp=drive_link" class="btn btn-outline"><i class="fas fa-download"></i> View Resume</a>
                 </div>
             </div>
-            <div class="hero-image animate fade-in delay-3">
+             <div class="hero-image animate fade-in delay-3">
                 <img src="new-folder/Images/analyst (3).png" alt="Omar Hamdy's Photo" class="data-analyst-img">
             </div>
+
         </div>
     </section>
 
@@ -1200,7 +1211,7 @@
             </div>
             <div class="about-content">
                 <div class="about-text animate fade-in">
-                    <h3>Transforming Data into Actionable Insights</h3>
+                       <h3>Transforming Data into Actionable Insights</h3>
                     <p>I'm a passionate data professional with expertise in transforming raw data into meaningful insights. My journey in data analysis has equipped me with the skills to clean, analyze, and visualize data effectively to support business decisions.</p>
                     <p>Proficient in Excel, SQL, Python, Power BI, and Tableau, I have a strong ability to extract insights and present data through interactive dashboards. I'm constantly learning and adapting to new technologies in the data field.</p>
                   
