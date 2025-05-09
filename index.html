@@ -6,17 +6,13 @@
     <title>Omar Hamdy | Data Analyst Portfolio</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&display=swap" rel="stylesheet">
- <!-- Main favicon links -->
-  <link rel="icon" type="image/png" href="new-folder/Images/analyst (3).png">
-  
-  <!-- Additional recommended formats -->
-  <link rel="apple-touch-icon" href="new-folder/Images/analyst (3).png">
-  
-  <!-- Fallback for older browsers -->
-  <link rel="shortcut icon" href="new-folder/Images/analyst (3).png">
-  
-
-  <style>
+    <!-- Main favicon links -->
+    <link rel="icon" type="image/png" href="new-folder/Images/analyst (3).png">
+    <!-- Additional recommended formats -->
+    <link rel="apple-touch-icon" href="new-folder/Images/analyst (3).png">
+    <!-- Fallback for older browsers -->
+    <link rel="shortcut icon" href="new-folder/Images/analyst (3).png">
+    <style>
         :root {
             --primary: #fbed52;
             --secondary: #ff9d00;
@@ -273,46 +269,57 @@
             border-color: var(--primary);
         }
         
-/* Update your hero-image styles */
-.hero-image {
-    position: relative;
-    display: flex;
-    justify-content: center; /* Center horizontally */
-    align-items: center; /* Center vertically */
-    width: 320px; /* Match circle size */
-    height: 320px;
-    margin: 0 auto; /* Center in its container */
-}
+        /* Enhanced Hero Image with Professional Glow */
+        .hero-image {
+            position: relative;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            width: 320px;
+            height: 320px;
+            margin: 0 auto;
+        }
 
-/* Circle background */
-.hero-image::before {
-    content: '';
-    position: absolute;
-    width: 100%; /* Full size of container */
-    height: 100%;
-    background-color: #fbed52;
-    border-radius: 50%;
-    z-index: -1;
-    opacity: 0.2;
-    animation: pulse 8s infinite alternate;
-    /* Already centered via parent flexbox */
-}
+        /* Professional glowing circle effect */
+        .hero-image::before {
+            content: '';
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            background: radial-gradient(circle, 
+                rgba(251, 237, 82, 0.3) 0%, 
+                rgba(251, 237, 82, 0.2) 30%, 
+                rgba(251, 237, 82, 0.1) 60%, 
+                transparent 80%);
+            border-radius: 50%;
+            z-index: -1;
+            animation: pulse 4s infinite ease-in-out;
+            box-shadow: 
+                0 0 60px rgba(251, 237, 82, 0.4),
+                0 0 120px rgba(251, 237, 82, 0.2);
+            filter: blur(1px);
+        }
 
-/* Profile picture */
-.hero-image img {
-    width: 280px; /* Slightly smaller than circle */
-    height: 280px;
-    border-radius: 50%;
-    object-fit: cover;
-    border: 3px solid rgba(251, 237, 82, 0.3);
-    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.2);
-    transition: var(--transition);
-    /* Position remains unchanged */
-}
+        /* Profile picture with enhanced border */
+        .hero-image img {
+            width: 280px;
+            height: 280px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 4px solid rgba(251, 237, 82, 0.4);
+            box-shadow: 
+                0 0 30px rgba(251, 237, 82, 0.3),
+                0 0 60px rgba(251, 237, 82, 0.2),
+                inset 0 0 20px rgba(251, 237, 82, 0.2);
+            transition: all 0.5s cubic-bezier(0.25, 0.8, 0.25, 1);
+        }
 
-        
         .hero-image img:hover {
-            transform: translateY(-5px);
+            transform: translateY(-5px) scale(1.02);
+            box-shadow: 
+                0 0 40px rgba(251, 237, 82, 0.4),
+                0 0 80px rgba(251, 237, 82, 0.3),
+                inset 0 0 30px rgba(251, 237, 82, 0.3);
         }
         
         /* Sections */
@@ -977,18 +984,28 @@
             }
         }
         
+        /* Enhanced pulse animation for profile circle */
         @keyframes pulse {
             0% {
-                transform: scale(1);
-                opacity: 0.15;
+                transform: scale(0.98);
+                opacity: 0.8;
+                box-shadow: 
+                    0 0 60px rgba(251, 237, 82, 0.4),
+                    0 0 120px rgba(251, 237, 82, 0.2);
             }
             50% {
-                transform: scale(1.05);
-                opacity: 0.2;
+                transform: scale(1.02);
+                opacity: 1;
+                box-shadow: 
+                    0 0 80px rgba(251, 237, 82, 0.6),
+                    0 0 140px rgba(251, 237, 82, 0.3);
             }
             100% {
-                transform: scale(1);
-                opacity: 0.15;
+                transform: scale(0.98);
+                opacity: 0.8;
+                box-shadow: 
+                    0 0 60px rgba(251, 237, 82, 0.4),
+                    0 0 120px rgba(251, 237, 82, 0.2);
             }
         }
         
@@ -1209,7 +1226,6 @@
              <div class="hero-image animate fade-in delay-3">
                 <img src="new-folder/Images/Profile Picture.jpg" alt="Omar Hamdy's Photo" class="data-analyst-img">
             </div>
-
         </div>
     </section>
 
@@ -1571,9 +1587,6 @@
                 </div>
             </div>
         </section>
-
-       
-
 
   <!-- Footer -->
   <footer>
