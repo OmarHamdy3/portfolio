@@ -273,31 +273,36 @@
             border-color: var(--primary);
         }
         
+/* Replace your existing .hero-image styles with this */
 .hero-image {
-    position: relative;
+    flex: 1;
     display: flex;
-    justify-content: center;
-    align-items: center;
+    justify-content: flex-start; /* Changed from center to flex-start */
+    padding-left: 60px; /* Adjust this value to move left/right */
+    position: relative;
 }
 
+/* Keep your existing .hero-image::before styles */
 .hero-image::before {
     content: '';
     position: absolute;
-    width: 320px; /* Slightly larger than your image */
+    width: 320px;
     height: 320px;
-    background-color: #fbed52; /* Your yellow color */
-    border-radius: 50%; /* Makes it circular */
-    z-index: -1; /* Puts it behind the image */
-    opacity: 0.2; /* Makes it slightly transparent */
-    animation: pulse 8s infinite alternate; /* Optional: adds the pulse animation you already have */
+    background-color: #fbed52;
+    border-radius: 50%;
+    z-index: -1;
+    opacity: 0.2;
+    animation: pulse 8s infinite alternate;
+    left: 60px; /* Match this with padding-left above */
 }
 
+/* Keep your existing .hero-image img styles */
 .hero-image img {
     width: 280px;
     height: 280px;
     border-radius: 50%;
     object-fit: cover;
-    border: 3px solid rgba(251, 237, 82, 0.3); /* Optional yellow border */
+    border: 3px solid rgba(251, 237, 82, 0.3);
     box-shadow: 0 8px 30px rgba(0, 0, 0, 0.2);
     transition: var(--transition);
 }
