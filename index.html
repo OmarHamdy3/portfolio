@@ -292,14 +292,17 @@
             animation: pulse 8s infinite alternate;
         }
         
-        .hero-image img {
-            max-width: 100%;
-            height: auto;
-            border-radius: var(--border-radius);
-            box-shadow: var(--box-shadow);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            transition: var(--transition);
-        }
+
+.hero-image img {
+    max-width: 100%;
+    height: auto;
+    border-radius: var(--border-radius);
+    box-shadow: var(--box-shadow);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    transition: var(--transition);
+    width: 350px; /* Add this line to set a specific width */
+    max-height: 400px; /* Add this to control height if needed */
+}
         
         .hero-image img:hover {
             transform: translateY(-5px);
