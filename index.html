@@ -273,16 +273,17 @@
             border-color: var(--primary);
         }
         
-/* Replace your existing .hero-image styles with this */
+/* Update your hero-image styles */
 .hero-image {
     flex: 1;
     display: flex;
-    justify-content: flex-start; /* Changed from center to flex-start */
-    padding-left: 60px; /* Adjust this value to move left/right */
+    justify-content: center; /* Center horizontally */
+    align-items: center; /* Center vertically */
     position: relative;
+    margin-left: 40px; /* Moves whole circle+image right */
 }
 
-/* Keep your existing .hero-image::before styles */
+/* Circle background */
 .hero-image::before {
     content: '';
     position: absolute;
@@ -293,10 +294,12 @@
     z-index: -1;
     opacity: 0.2;
     animation: pulse 8s infinite alternate;
-    left: 60px; /* Match this with padding-left above */
+    /* Center the circle */
+    left: 50%;
+    transform: translateX(-50%);
 }
 
-/* Keep your existing .hero-image img styles */
+/* Profile picture */
 .hero-image img {
     width: 280px;
     height: 280px;
@@ -305,6 +308,9 @@
     border: 3px solid rgba(251, 237, 82, 0.3);
     box-shadow: 0 8px 30px rgba(0, 0, 0, 0.2);
     transition: var(--transition);
+    /* Center the image */
+    position: relative;
+    left: 0;
 }
 
         
