@@ -273,35 +273,32 @@
             border-color: var(--primary);
         }
         
-        .hero-image {
-            flex: 1;
-            display: flex;
-            justify-content: center;
-            position: relative;
-        }
-        
-        .hero-image::before {
-            content: '';
-            position: absolute;
-            width: 300px;
-            height: 300px;
-            background: radial-gradient(circle, var(--primary) 0%, transparent 70%);
-            filter: blur(80px);
-            opacity: 0.15;
-            z-index: -1;
-            animation: pulse 8s infinite alternate;
-        }
-        
+.hero-image {
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
 
-
+.hero-image::before {
+    content: '';
+    position: absolute;
+    width: 320px; /* Slightly larger than your image */
+    height: 320px;
+    background-color: #fbed52; /* Your yellow color */
+    border-radius: 50%; /* Makes it circular */
+    z-index: -1; /* Puts it behind the image */
+    opacity: 0.2; /* Makes it slightly transparent */
+    animation: pulse 8s infinite alternate; /* Optional: adds the pulse animation you already have */
+}
 
 .hero-image img {
-    width: 280px; /* Adjust size as needed */
-    height: 280px; /* Must match width for perfect circle */
-    border-radius: 50%; /* This makes it circular */
-    object-fit: cover; /* Ensures image fills circle without distortion */
-    border: 3px solid var(--primary); /* Optional: adds a colored border */
-    box-shadow: var(--box-shadow);
+    width: 280px;
+    height: 280px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 3px solid rgba(251, 237, 82, 0.3); /* Optional yellow border */
+    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.2);
     transition: var(--transition);
 }
 
