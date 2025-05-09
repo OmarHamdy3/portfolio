@@ -275,42 +275,39 @@
         
 /* Update your hero-image styles */
 .hero-image {
-    flex: 1;
+    position: relative;
     display: flex;
     justify-content: center; /* Center horizontally */
     align-items: center; /* Center vertically */
-    position: relative;
-    margin-left: 40px; /* Moves whole circle+image right */
+    width: 320px; /* Match circle size */
+    height: 320px;
+    margin: 0 auto; /* Center in its container */
 }
 
 /* Circle background */
 .hero-image::before {
     content: '';
     position: absolute;
-    width: 320px;
-    height: 320px;
+    width: 100%; /* Full size of container */
+    height: 100%;
     background-color: #fbed52;
     border-radius: 50%;
     z-index: -1;
     opacity: 0.2;
     animation: pulse 8s infinite alternate;
-    /* Center the circle */
-    left: 50%;
-    transform: translateX(-50%);
+    /* Already centered via parent flexbox */
 }
 
 /* Profile picture */
 .hero-image img {
-    width: 280px;
+    width: 280px; /* Slightly smaller than circle */
     height: 280px;
     border-radius: 50%;
     object-fit: cover;
     border: 3px solid rgba(251, 237, 82, 0.3);
     box-shadow: 0 8px 30px rgba(0, 0, 0, 0.2);
     transition: var(--transition);
-    /* Center the image */
-    position: relative;
-    left: 0;
+    /* Position remains unchanged */
 }
 
         
