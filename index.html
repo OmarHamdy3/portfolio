@@ -187,7 +187,7 @@
         }
         
         .hero-text h1 {
-            font-size: 3rem; /* Increased from 2.5rem */
+            font-size: 3rem;
             margin-bottom: 1rem;
             line-height: 1.2;
             background: linear-gradient(90deg, var(--light), var(--primary));
@@ -773,91 +773,91 @@
         .project-links a i {
             font-size: 1rem;
         }
-
-/* Certifications Section */
-.certifications-container {
-    display: flex;
-    flex-direction: column;
-    gap: 1.5rem;
-}
-
-.certifications-row {
-    display: flex;
-    flex-direction: column;
-    gap: 1.5rem;
-}
-
-.certification-card {
-    width: 100%;
-    background: var(--card-bg);
-    border-radius: var(--border-radius);
-    overflow: hidden;
-    transition: var(--transition);
-    box-shadow: var(--box-shadow);
-    border: 1px solid rgba(255, 255, 255, 0.08);
-}
-
-.certification-card:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
-    border-color: rgba(251, 237, 82, 0.3);
-}
-
-.certification-image {
-    height: 180px;
-    overflow: hidden;
-    border-bottom: 1px solid rgba(255, 255, 255, 0.08);
-}
-
-.certification-image img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    transition: transform 0.8s ease;
-}
-
-.certification-card:hover .certification-image img {
-    transform: scale(1.05);
-}
-
-.certification-content {
-    padding: 1.5rem;
-}
-
-.certification-content h3 {
-    font-size: 1.1rem;
-    margin-bottom: 0.5rem;
-    color: #ffffff;
-}
-
-.certification-issuer {
-    color: var(--gray);
-    font-size: 0.85rem;
-    margin-bottom: 0.8rem;
-    font-weight: 500;
-}
-
-.certification-details {
-    list-style: none;
-}
-
-.certification-details li {
-    margin-bottom: 0.5rem;
-    position: relative;
-    padding-left: 1.2rem;
-    color: rgba(240, 240, 245, 0.8);
-    font-size: 0.85rem;
-    line-height: 1.5;
-}
-
-.certification-details li::before {
-    content: '▹';
-    position: absolute;
-    left: 0;
-    color: var(--primary);
-    font-size: 0.9rem;
-}
         
+        /* Certifications Section */
+        .certifications-container {
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+        }
+
+        .certifications-row {
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+        }
+
+        .certification-card {
+            width: 100%;
+            background: var(--card-bg);
+            border-radius: var(--border-radius);
+            overflow: hidden;
+            transition: var(--transition);
+            box-shadow: var(--box-shadow);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+        }
+
+        .certification-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
+            border-color: rgba(251, 237, 82, 0.3);
+        }
+
+        .certification-image {
+            height: 180px;
+            overflow: hidden;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+        }
+
+        .certification-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.8s ease;
+        }
+
+        .certification-card:hover .certification-image img {
+            transform: scale(1.05);
+        }
+
+        .certification-content {
+            padding: 1.5rem;
+        }
+
+        .certification-content h3 {
+            font-size: 1.1rem;
+            margin-bottom: 0.5rem;
+            color: #ffffff;
+        }
+
+        .certification-issuer {
+            color: var(--gray);
+            font-size: 0.85rem;
+            margin-bottom: 0.8rem;
+            font-weight: 500;
+        }
+
+        .certification-details {
+            list-style: none;
+        }
+
+        .certification-details li {
+            margin-bottom: 0.5rem;
+            position: relative;
+            padding-left: 1.2rem;
+            color: rgba(240, 240, 245, 0.8);
+            font-size: 0.85rem;
+            line-height: 1.5;
+        }
+
+        .certification-details li::before {
+            content: '▹';
+            position: absolute;
+            left: 0;
+            color: var(--primary);
+            font-size: 0.9rem;
+        }
+
         /* Contact Section */
         .contact-container {
             display: flex;
@@ -1171,6 +1171,244 @@
             transform-origin: left;
         }
 
+        /* Enhanced Project Modals */
+        .project-modal {
+            display: none;
+            position: fixed;
+            z-index: 2000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            overflow-y: auto;
+            background-color: rgba(5, 5, 10, 0.95);
+            backdrop-filter: blur(5px);
+            animation: fadeIn 0.3s ease-out;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        .modal-content {
+            background-color: var(--card-bg);
+            margin: 3% auto;
+            padding: 2.5rem;
+            border-radius: var(--border-radius);
+            max-width: 900px;
+            width: 90%;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.3);
+            border: 1px solid rgba(251, 237, 82, 0.2);
+            position: relative;
+            animation: modalSlideIn 0.4s ease-out;
+        }
+
+        @keyframes modalSlideIn {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .close-modal {
+            position: absolute;
+            top: 1.5rem;
+            right: 1.5rem;
+            font-size: 1.8rem;
+            color: var(--gray);
+            cursor: pointer;
+            transition: var(--transition);
+            z-index: 1;
+            background: none;
+            border: none;
+        }
+
+        .close-modal:hover {
+            color: var(--primary);
+            transform: rotate(90deg);
+        }
+
+        .modal-header {
+            margin-bottom: 2rem;
+            padding-bottom: 1.5rem;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .modal-header h2 {
+            color: var(--primary);
+            font-size: 2rem;
+            margin-bottom: 0.5rem;
+            text-align: center;
+            font-weight: 700;
+        }
+
+        .modal-subtitle {
+            color: var(--gray);
+            text-align: center;
+            font-size: 1rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .modal-section {
+            margin-bottom: 2.5rem;
+        }
+
+        .modal-section h3 {
+            color: var(--light);
+            margin-bottom: 1.2rem;
+            font-size: 1.3rem;
+            position: relative;
+            display: inline-block;
+        }
+
+        .modal-section h3::after {
+            content: '';
+            position: absolute;
+            width: 40px;
+            height: 2px;
+            background: linear-gradient(to right, var(--primary), var(--secondary));
+            bottom: -8px;
+            left: 0;
+        }
+
+        .modal-section p, 
+        .modal-section ul {
+            color: rgba(240, 240, 245, 0.8);
+            line-height: 1.7;
+            margin-bottom: 1.2rem;
+            font-size: 0.95rem;
+        }
+
+        .modal-section ul {
+            padding-left: 1.5rem;
+        }
+
+        .modal-section li {
+            margin-bottom: 0.8rem;
+            position: relative;
+        }
+
+        
+
+        /* Video Container */
+        .video-container {
+            position: relative;
+            padding-bottom: 56.25%; /* 16:9 aspect ratio */
+            height: 0;
+            overflow: hidden;
+            margin-bottom: 2rem;
+            border-radius: var(--border-radius);
+            background: var(--darker);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .video-container iframe {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            border: none;
+        }
+
+        /* Dashboard Images */
+        .dashboard-images {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 1.5rem;
+            margin-top: 1.5rem;
+        }
+
+        .dashboard-image {
+            border-radius: 8px;
+            overflow: hidden;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+            transition: var(--transition);
+        }
+
+        .dashboard-image:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(251, 237, 82, 0.1);
+        }
+
+        .dashboard-image img {
+            width: 100%;
+            height: auto;
+            display: block;
+        }
+
+        /* Tools Section */
+        .modal-tools {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.8rem;
+            margin-top: 1.5rem;
+        }
+
+        .modal-tool {
+            background: rgba(251, 237, 82, 0.15);
+            padding: 0.6rem 1rem;
+            border-radius: 50px;
+            font-size: 0.85rem;
+            color: var(--primary);
+            border: 1px solid rgba(251, 237, 82, 0.15);
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            transition: var(--transition);
+        }
+
+        .modal-tool:hover {
+            background: rgba(251, 237, 82, 0.25);
+            transform: translateY(-2px);
+        }
+
+        .modal-tool i {
+            font-size: 0.9rem;
+        }
+
+        /* Back Button */
+        .back-to-portfolio {
+            margin-top: 2rem;
+            width: 100%;
+            display: flex;
+            justify-content: center;
+        }
+
+        .back-to-portfolio .btn {
+            padding: 0.8rem 2rem;
+            font-size: 1rem;
+        }
+
+        .back-to-portfolio i {
+            transition: transform 0.3s ease;
+        }
+
+        .back-to-portfolio:hover i {
+            transform: translateX(-5px);
+        }
+
+        /* Responsive adjustments for modals */
+        @media (max-width: 768px) {
+            .modal-content {
+                padding: 1.5rem;
+            }
+            
+            .modal-header h2 {
+                font-size: 1.5rem;
+            }
+            
+            .dashboard-images {
+                grid-template-columns: 1fr;
+            }
+        }
+
         /* Responsive */
         @media (min-width: 576px) {
             .container {
@@ -1284,6 +1522,14 @@
                 display: grid;
                 grid-template-columns: repeat(3, 1fr);
                 gap: 2rem;
+            }
+
+            .modal-images {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            
+            .modal-content {
+                padding: 3rem;
             }
         }
 
@@ -1585,29 +1831,28 @@
                         <div class="project-tool">Pandas</div>
                     </div>
                     <div class="project-links">
-                        <a href="#"><i class="fas fa-external-link-alt"></i> Live Demo</a>
+                        <a href="#" class="project-details-btn" data-modal="superstore-modal"><i class="fas fa-external-link-alt"></i> Project Details</a>
                         <a href="#"><i class="fab fa-github"></i> View Code</a>
-                      </div>
                     </div>
                 </div>
+            </div>
 
-                <div class="project-card animate fade-in delay-1">
-                    <div class="project-image">
-                        <img src="new-folder/Road Accident/Main Sheet.png" alt="Road Accident Dashboard 1">
+            <div class="project-card animate fade-in delay-1">
+                <div class="project-image">
+                    <img src="new-folder/Road Accident/Main Sheet.png" alt="Road Accident Dashboard 1">
+                </div>
+                <div class="project-content">
+                    <h3>Road Accident Analysis</h3>
+                    <p>Built Excel dashboards to explore accident data trends across locations, time, and causes for safety planning.</p>
+                    <div class="project-tools">
+                        <div class="project-tool">Excel</div>
+                        <div class="project-tool">Power Query</div>
+                        <div class="project-tool">Power Pivot</div>
+                        <div class="project-tool">Pivot Tables</div>
                     </div>
-                    <div class="project-content">
-                        <h3>Road Accident Analysis</h3>
-                        <p>Built Excel dashboards to explore accident data trends across locations, time, and causes for safety planning.</p>
-                        <div class="project-tools">
-                            <div class="project-tool">Excel</div>
-                            <div class="project-tool">Power Query</div>
-                            <div class="project-tool">Power Pivot</div>
-                            <div class="project-tool">Pivot Tables</div>
-                        </div>
-                        <div class="project-links">
-                            <a href="#"><i class="fas fa-external-link-alt"></i> Live Demo</a>
-                            <a href="#"><i class="fab fa-github"></i> View Code</a>
-                        </div>
+                    <div class="project-links">
+                        <a href="#" class="project-details-btn" data-modal="road-accident-modal"><i class="fas fa-external-link-alt"></i> Project Details</a>
+                        <a href="#"><i class="fab fa-github"></i> View Code</a>
                     </div>
                 </div>
             </div>
@@ -1856,6 +2101,198 @@
     </div>
 </footer>
 
+<!-- Enhanced Project Details Modals -->
+<!-- Superstore Modal -->
+<div id="superstore-modal" class="project-modal">
+    <div class="modal-content">
+        <button class="close-modal">&times;</button>
+        
+        <div class="modal-header">
+            <h2>Superstore Business Performance Analysis</h2>
+            <p class="modal-subtitle">Comprehensive analysis of sales data to drive business strategy</p>
+        </div>
+        
+        <!-- Video Section -->
+        <div class="modal-section">
+            <h3>Project Demonstration</h3>
+            <div class="video-container">
+                <!-- Replace with your actual video embed code -->
+                <iframe src="https://www.youtube.com/embed/your-video-id" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+            </div>
+            <p>This video walkthrough demonstrates the interactive features of the Superstore dashboard and key findings from the analysis.</p>
+        </div>
+        
+        <!-- Dashboard Views Section -->
+        <div class="modal-section">
+            <h3>Dashboard Views</h3>
+            <div class="dashboard-images">
+                <div class="dashboard-image">
+                    <img src="new-folder/Superstore/Overview-Dashboard-Figma.png" alt="Superstore Overview Dashboard">
+                </div>
+                <div class="dashboard-image">
+                    <img src="new-folder/Superstore/Regional-Analysis.png" alt="Regional Analysis Dashboard">
+                </div>
+                <div class="dashboard-image">
+                    <img src="new-folder/Superstore/Product-Performance.png" alt="Product Performance Dashboard">
+                </div>
+                <div class="dashboard-image">
+                    <img src="new-folder/Superstore/Customer-Segmentation.png" alt="Customer Segmentation Dashboard">
+                </div>
+            </div>
+        </div>
+        
+        <!-- Project Steps Section -->
+        <div class="modal-section">
+            <h3>Project Steps</h3>
+            <ul>
+                <li><strong>Data Collection:</strong> Gathered 4 years of sales data from Superstore's database</li>
+                <li><strong>Data Cleaning:</strong> Addressed missing values, outliers, and inconsistencies using Python</li>
+                <li><strong>Exploratory Analysis:</strong> Identified initial patterns and correlations in the data</li>
+                <li><strong>Dashboard Design:</strong> Created wireframes in Figma for optimal user experience</li>
+                <li><strong>Visualization Development:</strong> Built interactive dashboards in Tableau</li>
+                <li><strong>Insight Generation:</strong> Derived actionable business recommendations</li>
+            </ul>
+        </div>
+        
+        <!-- Key Insights Section -->
+        <div class="modal-section">
+            <h3>Key Insights</h3>
+            <ul>
+                <li><strong>Category Performance:</strong> Technology category showed 15% quarter-over-quarter growth, while Furniture had lowest profit margins at 8%</li>
+                <li><strong>Regional Analysis:</strong> West region consistently outperformed others with 23% higher profit margins</li>
+                <li><strong>Customer Segmentation:</strong> Corporate clients accounted for 45% of total sales but only 35% of profits</li>
+                <li><strong>Seasonal Trends:</strong> Q4 sales were 40% higher than other quarters due to holiday season</li>
+                <li><strong>Shipping Analysis:</strong> Standard shipping had 15% higher customer satisfaction than express options</li>
+            </ul>
+        </div>
+        
+        <!-- Recommendations Section -->
+        <div class="modal-section">
+            <h3>Recommendations</h3>
+            <ul>
+                <li>Reallocate marketing budget to focus on high-growth Technology category in West region</li>
+                <li>Implement pricing strategy review for Furniture category to improve margins</li>
+                <li>Develop targeted promotions for Corporate clients to improve profitability</li>
+                <li>Expand inventory planning for Q4 peak season based on historical trends</li>
+                <li>Investigate reasons behind lower satisfaction with express shipping options</li>
+            </ul>
+        </div>
+        
+        <!-- Tools Used Section -->
+        <div class="modal-section">
+            <h3>Tools Used</h3>
+            <div class="modal-tools">
+                <div class="modal-tool"><i class="fab fa-python"></i> Python</div>
+                <div class="modal-tool"><i class="fas fa-chart-bar"></i> Tableau</div>
+                <div class="modal-tool"><i class="fas fa-database"></i> SQL</div>
+                <div class="modal-tool"><i class="fas fa-project-diagram"></i> Draw.io</div>
+                <div class="modal-tool"><i class="fab fa-figma"></i> Figma</div>
+                <div class="modal-tool"><i class="fas fa-table"></i> Pandas</div>
+            </div>
+        </div>
+        
+        <!-- Back Button -->
+        <div class="back-to-portfolio">
+            <button class="btn"><i class="fas fa-arrow-left"></i> Back To Portfolio</button>
+        </div>
+    </div>
+</div>
+
+<!-- Road Accident Modal -->
+<div id="road-accident-modal" class="project-modal">
+    <div class="modal-content">
+        <button class="close-modal">&times;</button>
+        
+        <div class="modal-header">
+            <h2>Road Accident Analysis</h2>
+            <p class="modal-subtitle">Interactive dashboards for transportation safety planning</p>
+        </div>
+        
+        <!-- Video Section -->
+        <div class="modal-section">
+            <h3>Project Demonstration</h3>
+            <div class="video-container">
+                <!-- Replace with your actual video embed code -->
+                <iframe src="https://www.youtube.com/embed/your-video-id" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+            </div>
+            <p>This video demonstrates the interactive features of the Road Accident dashboard and how to navigate between different views.</p>
+        </div>
+        
+        <!-- Dashboard Views Section -->
+        <div class="modal-section">
+            <h3>Dashboard Views</h3>
+            <div class="dashboard-images">
+                <div class="dashboard-image">
+                    <img src="new-folder/Road Accident/Main Sheet.png" alt="Main Dashboard">
+                </div>
+                <div class="dashboard-image">
+                    <img src="new-folder/Road Accident/Time Analysis.png" alt="Time Analysis Dashboard">
+                </div>
+                <div class="dashboard-image">
+                    <img src="new-folder/Road Accident/Location Analysis.png" alt="Location Analysis Dashboard">
+                </div>
+                <div class="dashboard-image">
+                    <img src="new-folder/Road Accident/Vehicle Analysis.png" alt="Vehicle Analysis Dashboard">
+                </div>
+            </div>
+        </div>
+        
+        <!-- Project Steps Section -->
+        <div class="modal-section">
+            <h3>Project Steps</h3>
+            <ul>
+                <li><strong>Data Collection:</strong> Compiled accident reports from national transportation database</li>
+                <li><strong>Data Transformation:</strong> Used Power Query to clean and reshape raw data</li>
+                <li><strong>Data Modeling:</strong> Created relationships between tables using Power Pivot</li>
+                <li><strong>KPI Definition:</strong> Established key metrics for accident severity and frequency</li>
+                <li><strong>Dashboard Development:</strong> Built interactive views with slicers for user exploration</li>
+                <li><strong>Validation:</strong> Cross-checked findings with official statistics for accuracy</li>
+            </ul>
+        </div>
+        
+        <!-- Key Insights Section -->
+        <div class="modal-section">
+            <h3>Key Insights</h3>
+            <ul>
+                <li><strong>Temporal Patterns:</strong> Friday evenings (6-9pm) showed 28% higher accident rates</li>
+                <li><strong>Location Analysis:</strong> Urban areas accounted for 65% of accidents despite better infrastructure</li>
+                <li><strong>Weather Impact:</strong> Weather-related accidents peaked during winter months (Nov-Feb)</li>
+                <li><strong>Vehicle Types:</strong> Motorcycles involved in 40% of fatal accidents despite being 15% of vehicles</li>
+                <li><strong>Road Conditions:</strong> Wet surfaces contributed to 35% more severe accidents than dry conditions</li>
+            </ul>
+        </div>
+        
+        <!-- Recommendations Section -->
+        <div class="modal-section">
+            <h3>Recommendations</h3>
+            <ul>
+                <li>Increase police patrols during high-risk Friday evening hours</li>
+                <li>Implement targeted urban safety campaigns focusing on pedestrian crossings</li>
+                <li>Develop winter weather preparedness program for drivers</li>
+                <li>Create motorcycle safety initiative with mandatory training components</li>
+                <li>Improve drainage systems on roads with frequent wet surface accidents</li>
+            </ul>
+        </div>
+        
+        <!-- Tools Used Section -->
+        <div class="modal-section">
+            <h3>Tools Used</h3>
+            <div class="modal-tools">
+                <div class="modal-tool"><i class="fas fa-file-excel"></i> Excel</div>
+                <div class="modal-tool"><i class="fas fa-random"></i> Power Query</div>
+                <div class="modal-tool"><i class="fas fa-project-diagram"></i> Power Pivot</div>
+                <div class="modal-tool"><i class="fas fa-table"></i> Pivot Tables</div>
+                <div class="modal-tool"><i class="fas fa-map-marked-alt"></i> Geographic Analysis</div>
+            </div>
+        </div>
+        
+        <!-- Back Button -->
+        <div class="back-to-portfolio">
+            <button class="btn"><i class="fas fa-arrow-left"></i> Back To Portfolio</button>
+        </div>
+    </div>
+</div>
+
 <script>
     // Mobile menu toggle
     const hamburger = document.getElementById('hamburger');
@@ -1926,6 +2363,55 @@
     });
 
     animateElements.forEach(el => observer.observe(el));
+
+    // Project Modals functionality
+    const projectDetailBtns = document.querySelectorAll('.project-details-btn');
+    const modals = document.querySelectorAll('.project-modal');
+    const closeModalBtns = document.querySelectorAll('.close-modal, .back-to-portfolio .btn');
+
+    // Open modal when clicking project details button
+    projectDetailBtns.forEach(btn => {
+        btn.addEventListener('click', (e) => {
+            e.preventDefault();
+            const modalId = btn.getAttribute('data-modal');
+            const modal = document.getElementById(modalId);
+            if (modal) {
+                modal.style.display = 'block';
+                document.body.style.overflow = 'hidden'; // Prevent scrolling
+            }
+        });
+    });
+
+    // Close modal when clicking X or back button
+    closeModalBtns.forEach(btn => {
+        btn.addEventListener('click', (e) => {
+            e.preventDefault();
+            modals.forEach(modal => {
+                modal.style.display = 'none';
+            });
+            document.body.style.overflow = 'auto'; // Re-enable scrolling
+        });
+    });
+
+    // Close modal when clicking outside content
+    window.addEventListener('click', (e) => {
+        if (e.target.classList.contains('project-modal')) {
+            e.target.style.display = 'none';
+            document.body.style.overflow = 'auto';
+        }
+    });
+
+    // Close modal with ESC key
+    document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape') {
+            modals.forEach(modal => {
+                if (modal.style.display === 'block') {
+                    modal.style.display = 'none';
+                    document.body.style.overflow = 'auto';
+                }
+            });
+        }
+    });
 </script>
 </body>
 </html>
