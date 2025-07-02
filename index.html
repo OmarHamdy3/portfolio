@@ -864,6 +864,28 @@
             font-size: 0.9rem;
         }
 
+        /* View All Certificates Button */
+        .view-all-certificates {
+            text-align: center;
+            margin-top: 2rem;
+        }
+
+        .view-all-certificates .btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.8rem 2rem;
+            font-size: 1rem;
+        }
+
+        .view-all-certificates .btn i {
+            transition: transform 0.3s ease;
+        }
+
+        .view-all-certificates .btn:hover i {
+            transform: translateX(5px);
+        }
+
 
         /* Achievements Section */
 .achievements-container {
@@ -1851,16 +1873,12 @@
     </section>
 
 
-
-   
-    <!-- Experience Section -->
+        <!-- Experience Section -->
     <section class="section" id="experience">
         <div class="container">
             <div class="section-title">
                 <h2>My Experience</h2>
             </div>
-
-          
 
             <div class="experience-container">
                 <div class="experience-item animate fade-in">
@@ -1902,9 +1920,6 @@
             <h2>My Skills</h2>
         </div>
 
-
-        
-
         <div class="skills-container">
             <!-- Programming & Querying -->
             <div class="skills-category animate fade-in">
@@ -1914,9 +1929,6 @@
                     <div class="skill-item"><i class="fas fa-database"></i> SQL</div>
                 </div>
             </div>
-
-
-         
             
             <!-- Spreadsheet Skills -->
             <div class="skills-category animate fade-in delay-1">
@@ -1976,8 +1988,6 @@
                     <div class="skill-item"><i class="fas fa-check-double"></i> Data Validation</div>
                 </div>
             </div>
-
-            
         </div>
     </div>
 </section>
@@ -2010,10 +2020,6 @@
                     </div>
                 </div>
             </div>
-
-
-       
-
 
             <div class="project-card animate fade-in delay-1">
                 <div class="project-image">
@@ -2061,8 +2067,6 @@
                         </ul>
                     </div>
                 </div>
-
-
           
                 <!-- Certification 2 -->
                 <div class="certification-card animate fade-in delay-1">
@@ -2182,7 +2186,6 @@
                     </div>
                 </div>
 
-
                  <div class="certification-card animate fade-in delay-3">
                     <div class="certification-image">
                         <img src="new-folder/Certificate/certificate-of-completion-for-15-database-level-1-sql-concepts-and-practice.jpg" alt="Joining Data in SQL Certificate">
@@ -2197,8 +2200,14 @@
                         </ul>
                     </div>
                 </div>
-                
             </div>
+        </div>
+        
+        <!-- View All Certificates Button -->
+        <div class="view-all-certificates animate fade-in delay-4">
+            <a href="https://drive.google.com/drive/folders/1kaEkd6VMlei5J9nx1C3BprAGJ8yYnH3F?usp=drive_link" target="_blank" class="btn">
+                <i class="fas fa-certificate"></i> View All Certificates
+            </a>
         </div>
     </div>
 </section>
@@ -2228,6 +2237,7 @@
                     </div>
                 </div>
                 
+             
             </div>
         </div>
     </div>
@@ -2284,10 +2294,6 @@
                             <button type="submit" class="btn"><i class="fas fa-paper-plane"></i> Send Message</button>
                         </form>
                     </div>
-
-
-               
-
                 </div>
             </div>
         </section>
@@ -2355,6 +2361,20 @@
                 </div>
             </div>
         </div>
+
+        <!-- Project Description Section -->
+<div class="modal-section">
+    <h3>Project Description</h3>
+    <p>
+       The Superstore Business Performance Analysis project aims to uncover actionable insights into sales performance, profitability, 
+        and customer behavior across regions and product segments. The workflow began with data cleaning and preprocessing using 
+        SQL and Python (Pandas), followed by visual exploration with Plotly Express. Tableau was used to design an interactive 
+        dashboard based on a custom layout sketched in Draw.io and styled using Figma for visual consistency. The project was 
+        documented and planned in Notion for organized development. The final dashboard allows business stakeholders to monitor 
+        KPIs, identify underperforming areas, track seasonal trends, and make data-driven decisions that support growth and efficiency.
+    </p>
+</div>
+
         
         <!-- Project Steps Section -->
         <div class="modal-section">
@@ -2461,6 +2481,18 @@
             
             </div>
         </div>
+
+        <!-- Project Description Section -->
+<div class="modal-section">
+    <h3>Project Description</h3>
+    <p>
+        This project analyzes road accident data to uncover trends and patterns that contribute to transportation safety planning. 
+        Using Excel, Power Query, Power Pivot, and Pivot Tables, I developed an interactive dashboard that breaks down accident data 
+        by time, location, weather, road conditions, and driver characteristics. The goal was to provide a dynamic reporting tool for 
+        decision-makers to understand accident hotspots and identify high-risk factors. Key insights such as peak accident times, 
+        urban vs. rural accident rates, and the impact of weather were highlighted to support actionable safety recommendations.
+    </p>
+</div>
         
         <!-- Project Steps Section -->
         <div class="modal-section">
