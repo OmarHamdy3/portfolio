@@ -160,6 +160,190 @@
         }
 
 
+        .sidebar-name {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.6rem;
+    font-size: 1.8rem;   /* MAIN SIZE — increase here */
+    font-weight: 700;
+    line-height: 1.2;
+}
+
+.sidebar-name i {
+    font-size: 1.4rem;   /* icon slightly smaller than text */
+    color: var(--primary);
+}
+
+.sidebar-name .first-name {
+    color: var(--primary);
+    font-size: 1.5rem;
+}
+
+.sidebar-name .last-name {
+    color: var(--light);
+    font-size: 1.5rem;
+}
+
+@media (max-width: 480px) {
+    .sidebar-name {
+        font-size: 1.6rem;
+    }
+}
+
+        /* Mobile Sidebar Navigation */
+.mobile-sidebar {
+    position: fixed;
+    top: 0;
+    right: -100%;            /* ⬅️ was left */
+    width: 280px;
+    height: 100vh;
+    background: rgba(10, 10, 18, 0.98);
+    backdrop-filter: blur(12px);
+    z-index: 2000;
+    padding: 2rem 1.5rem;
+    transition: right 0.4s ease;
+    display: flex;
+    flex-direction: column;
+}
+
+.mobile-sidebar.active {
+    right: 0;                /* ⬅️ slide in from right */
+}
+
+.sidebar-overlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.6);
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.3s ease;
+    z-index: 1500;
+}
+
+.sidebar-overlay.active {
+    opacity: 1;
+    pointer-events: all;
+}
+
+/* Sidebar Header */
+.sidebar-header {
+    text-align: center;
+    margin-bottom: 2rem;
+}
+
+.sidebar-header img {
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    border: 2px solid var(--primary);
+    margin-bottom: 0.8rem;
+}
+
+.sidebar-header h3 {
+    font-size: 1.2rem;
+    color: var(--light);
+}
+
+.sidebar-header span {
+    font-size: 0.9rem;
+    color: var(--gray);
+}
+
+/* Sidebar Nav */
+.sidebar-nav {
+    display: flex;
+    flex-direction: column;
+    gap: 0.8rem;
+}
+
+.sidebar-nav a {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    padding: 0.75rem 1rem;
+    border-radius: 12px;
+    color: var(--light);
+    font-weight: 500;
+    transition: var(--transition);
+}
+
+.sidebar-nav a i {
+    width: 20px;
+    text-align: center;
+    color: var(--primary);
+}
+
+.sidebar-nav a:hover,
+.sidebar-nav a.active {
+    background: linear-gradient(
+        90deg,
+        rgba(251, 237, 82, 0.15),
+        rgba(255, 157, 0, 0.08)
+    );
+    color: var(--primary);
+}
+
+/* Sidebar Footer */
+.sidebar-footer {
+    margin-top: auto;
+}
+
+.sidebar-socials {
+    display: flex;
+    justify-content: center;
+    gap: 1rem;
+}
+
+.sidebar-socials a {
+    width: 38px;
+    height: 38px;
+    background: var(--card-bg);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--light);
+    transition: var(--transition);
+}
+
+.sidebar-socials a:hover {
+    background: var(--primary);
+    color: var(--dark);
+}
+
+/* Hide desktop nav on mobile */
+@media (max-width: 767px) {
+    .nav-links {
+        display: none;
+    }
+}
+
+.sidebar-close {
+    position: absolute;
+    top: 1.2rem;
+    right: 1.2rem;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.06);
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    color: var(--light);
+    font-size: 1.2rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: var(--transition);
+}
+
+.sidebar-close:hover {
+    background: var(--primary);
+    color: var(--dark);
+    transform: rotate(90deg) scale(1.05);
+    box-shadow: 0 8px 20px rgba(251, 237, 82, 0.25);
+}
+
         
         
         /* Hero Section */
@@ -1830,6 +2014,45 @@
         </div>
     </header>
 
+
+    <!-- Mobile Sidebar -->
+<aside class="mobile-sidebar" id="mobileSidebar">
+    
+
+    <div class="sidebar-header">
+    
+        <h1 class="sidebar-name">
+    <i class="fas fa-chart-line"></i>
+    <span class="first-name">Omar</span>
+    <span class="last-name">Hamdy</span>
+</h1>
+
+        <span>Data Analyst</span>
+    </div>
+
+    <nav class="sidebar-nav">
+        <a href="#home" class="active"><i class="fa-solid fa-house"></i> Home</a>
+        <a href="#about"><i class="fa-solid fa-user"></i> About</a>
+        <a href="#experience"><i class="fa-solid fa-briefcase"></i> Experience</a>
+        <a href="#skills"><i class="fa-solid fa-code"></i> Skills</a>
+        <a href="#projects"><i class="fa-solid fa-folder-open"></i> Projects</a>
+        <a href="#certificates"><i class="fa-solid fa-certificate"></i> Certificates</a>
+        <a href="#achievements"><i class="fa-solid fa-trophy"></i> Achievements</a>
+        <a href="#contact"><i class="fa-solid fa-envelope"></i> Contact</a>
+    </nav>
+
+    <div class="sidebar-footer">
+        <div class="sidebar-socials">
+            <a href="#"><i class="fa-brands fa-linkedin-in"></i></a>
+            <a href="#"><i class="fa-brands fa-github"></i></a>
+            <a href="#"><i class="fa-brands fa-twitter"></i></a>
+        </div>
+    </div>
+</aside>
+
+<div class="sidebar-overlay" id="sidebarOverlay"></div>
+
+
     <!-- Hero Section -->
     <section class="hero" id="home">
         <div class="container hero-content">
@@ -2607,22 +2830,25 @@
 </div>
 
 <script>
-    // Mobile menu toggle
-    const hamburger = document.getElementById('hamburger');
-    const navLinks = document.getElementById('navLinks');
-    const menuIcon = document.getElementById('menu-icon');
-    const closeIcon = document.getElementById('close-icon');
+  const hamburger = document.querySelector('.hamburger');
+const sidebar = document.getElementById('mobileSidebar');
+const overlay = document.getElementById('sidebarOverlay');
+const sidebarLinks = document.querySelectorAll('.sidebar-nav a');
 
-    hamburger.addEventListener('click', () => {
-        navLinks.classList.toggle('active');
-        if (navLinks.classList.contains('active')) {
-            menuIcon.style.display = 'none';
-            closeIcon.style.display = 'block';
-        } else {
-            menuIcon.style.display = 'block';
-            closeIcon.style.display = 'none';
-        }
-    });
+hamburger.addEventListener('click', () => {
+    sidebar.classList.add('active');
+    overlay.classList.add('active');
+});
+
+overlay.addEventListener('click', closeSidebar);
+sidebarLinks.forEach(link => link.addEventListener('click', closeSidebar));
+
+function closeSidebar() {
+    sidebar.classList.remove('active');
+    overlay.classList.remove('active');
+}
+
+   
 
     // Close menu when clicking on a link
     document.querySelectorAll('.nav-links a').forEach(link => {
