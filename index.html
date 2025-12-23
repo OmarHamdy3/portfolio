@@ -264,7 +264,7 @@
             }
         }
 
-        /* Mobile Sidebar Navigation */
+       /* Mobile Sidebar Navigation */
 .mobile-sidebar {
     position: fixed;
     top: 0;
@@ -366,7 +366,7 @@
         rgba(251, 237, 82, 0.15),
         rgba(255, 157, 0, 0.08)
     );
-    color: #fbec52; /* YELLOW TEXT */
+    color: #fbec52;
 }
 
 /* ===== LIGHT MODE OVERRIDE ===== */
@@ -374,9 +374,14 @@
     color: #111;
 }
 
+/* 🔶 LIGHT MODE ACTIVE – ORANGE (TRANSPARENT) */
 [data-theme="light"] .sidebar-nav a.active {
-    background: rgba(0, 0, 0, 0.05);
-    color: #000; /* BLACK TEXT */
+    background: linear-gradient(
+        90deg,
+        rgba(255, 157, 0, 0.18),
+        rgba(255, 157, 0, 0.08)
+    );
+    color: #000;
 }
 
 /* Sidebar Footer */
@@ -445,6 +450,7 @@
     transform: rotate(90deg) scale(1.05);
     box-shadow: 0 8px 20px rgba(251, 237, 82, 0.25);
 }
+
 
         
         /* Hero Section */
