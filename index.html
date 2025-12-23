@@ -13,9 +13,9 @@
     <!-- Fallback for older browsers -->
     <link rel="shortcut icon" href="new-folder/Images/analyst (3).png">
 
-
     <style>
         :root {
+            /* Default dark mode variables */
             --primary: #fbed52;
             --secondary: #ff9d00;
             --dark: #0a0a12;
@@ -27,6 +27,20 @@
             --border-radius: 12px;
             --box-shadow: 0 8px 30px rgba(0, 0, 0, 0.2);
             --transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+        }
+
+        /* Light mode variables */
+        [data-theme="light"] {
+            --primary: linear-gradient(135deg, #ff9d00, #fbed52);
+            --primary-solid: #ff9d00;
+            --secondary: #ff6b00;
+            --dark: #f8f9fa;
+            --darker: #e9ecef;
+            --light: #212529;
+            --gray: #495057;
+            --dark-gray: #dee2e6;
+            --card-bg: #ffffff;
+            --box-shadow: 0 8px 30px rgba(0, 0, 0, 0.08);
         }
 
         * {
@@ -43,16 +57,17 @@
             overflow-x: hidden;
             scroll-behavior: smooth;
             -webkit-font-smoothing: antialiased;
+            transition: background-color 0.5s ease, color 0.5s ease;
         }
         
         ::selection {
-            background: var(--primary);
+            background: var(--primary-solid, var(--primary));
             color: var(--dark);
         }
         
         a {
             text-decoration: none;
-            color: var(--primary);
+            color: var(--primary-solid, var(--primary));
             transition: var(--transition);
         }
         
@@ -85,6 +100,11 @@
             border-bottom: 1px solid rgba(255, 255, 255, 0.08);
         }
         
+        [data-theme="light"] header {
+            background-color: rgba(248, 249, 250, 0.98);
+            border-bottom: 1px solid rgba(0, 0, 0, 0.08);
+        }
+        
         header.scrolled {
             padding: 0.8rem 0;
             box-shadow: var(--box-shadow);
@@ -99,7 +119,10 @@
         .logo {
             font-size: 1.5rem;
             font-weight: 700;
-            color: var(--primary);
+            background: var(--primary);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
             display: flex;
             align-items: center;
             gap: 0.5rem;
@@ -111,6 +134,47 @@
         
         .logo span {
             color: var(--light);
+        }
+        
+        /* Theme Toggle Button */
+        .theme-toggle {
+            background: var(--card-bg);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            border-radius: 50px;
+            width: 50px;
+            height: 50px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: var(--transition);
+            margin-left: 1rem;
+            color: var(--light);
+        }
+        
+        [data-theme="light"] .theme-toggle {
+            border: 1px solid rgba(0, 0, 0, 0.08);
+        }
+        
+        .theme-toggle:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+        
+        .theme-toggle i {
+            font-size: 1.2rem;
+            transition: transform 0.5s ease;
+        }
+        
+        .theme-toggle:hover i {
+            transform: rotate(30deg);
+        }
+        
+        /* Combined header navigation and theme toggle */
+        .header-nav-container {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
         }
         
         .nav-links {
@@ -131,7 +195,7 @@
             position: absolute;
             width: 0;
             height: 2px;
-            background: linear-gradient(90deg, var(--primary), var(--secondary));
+            background: var(--primary);
             bottom: 0;
             left: 0;
             transition: width 0.4s ease;
@@ -159,8 +223,7 @@
             transition: var(--transition);
         }
 
-
-     .sidebar-name {
+        .sidebar-name {
             display: flex;
             align-items: center;
             justify-content: center;
@@ -174,11 +237,17 @@
 
         .sidebar-name i {
             font-size: 1.4rem;
-            color: var(--primary);
+            background: var(--primary);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
         }
 
         .sidebar-name .first-name {
-            color: var(--primary);
+            background: var(--primary);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
             font-size: 1.5rem;
         }
 
@@ -208,6 +277,10 @@
             transition: right 0.4s ease;
             display: flex;
             flex-direction: column;
+        }
+        
+        [data-theme="light"] .mobile-sidebar {
+            background: rgba(248, 249, 250, 0.98);
         }
 
         .mobile-sidebar.active {
@@ -239,7 +312,9 @@
             width: 80px;
             height: 80px;
             border-radius: 50%;
-            border: 2px solid var(--primary);
+            border: 2px solid;
+            border-image: var(--primary);
+            border-image-slice: 1;
             margin-bottom: 0.8rem;
         }
 
@@ -274,7 +349,10 @@
         .sidebar-nav a i {
             width: 20px;
             text-align: center;
-            color: var(--primary);
+            background: var(--primary);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
         }
 
         .sidebar-nav a:hover,
@@ -284,7 +362,19 @@
                 rgba(251, 237, 82, 0.15),
                 rgba(255, 157, 0, 0.08)
             );
-            color: var(--primary);
+            background: var(--primary);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
+        
+        [data-theme="light"] .sidebar-nav a:hover,
+        [data-theme="light"] .sidebar-nav a.active {
+            background: linear-gradient(
+                90deg,
+                rgba(255, 157, 0, 0.15),
+                rgba(251, 237, 82, 0.08)
+            );
         }
 
         /* Sidebar Footer */
@@ -296,7 +386,6 @@
             display: flex;
             justify-content: center;
             gap: 1rem;
-           
         }
 
         .sidebar-socials a {
@@ -340,15 +429,19 @@
             cursor: pointer;
             transition: var(--transition);
         }
+        
+        [data-theme="light"] .sidebar-close {
+            background: rgba(0, 0, 0, 0.06);
+            border: 1px solid rgba(0, 0, 0, 0.12);
+            color: var(--light);
+        }
 
         .sidebar-close:hover {
-            background: var(--primary);
+            background: var(--primary-solid, var(--primary));
             color: var(--dark);
             transform: rotate(90deg) scale(1.05);
             box-shadow: 0 8px 20px rgba(251, 237, 82, 0.25);
         }
-
-       
         
         /* Hero Section */
         .hero {
@@ -360,6 +453,10 @@
             position: relative;
             overflow: hidden;
             background: radial-gradient(circle at 70% 30%, rgba(251, 237, 82, 0.08) 0%, transparent 60%);
+        }
+        
+        [data-theme="light"] .hero {
+            background: radial-gradient(circle at 70% 30%, rgba(255, 157, 0, 0.08) 0%, transparent 60%);
         }
         
         .hero-content {
@@ -383,7 +480,7 @@
             font-size: 3rem;
             margin-bottom: 1rem;
             line-height: 1.2;
-            background: linear-gradient(90deg, var(--light), var(--primary));
+            background: var(--primary);
             -webkit-background-clip: text;
             background-clip: text;
             color: transparent;
@@ -403,6 +500,10 @@
             max-width: 600px;
             color: rgba(240, 240, 245, 0.8);
             font-size: 1.1rem;
+        }
+        
+        [data-theme="light"] .hero-text p {
+            color: rgba(33, 37, 41, 0.8);
         }
         
         .social-links {
@@ -427,8 +528,12 @@
             border: 1px solid rgba(255, 255, 255, 0.1);
         }
         
+        [data-theme="light"] .social-links a {
+            border: 1px solid rgba(0, 0, 0, 0.1);
+        }
+
         .social-links a:hover {
-            background: var(--primary);
+            background: var(--primary-solid, var(--primary));
             color: var(--dark);
             transform: translateY(-3px);
             box-shadow: 0 8px 15px rgba(251, 237, 82, 0.2);
@@ -459,15 +564,15 @@
         
         .btn-outline {
             background: transparent;
-            border: 2px solid var(--primary);
-            color: var(--primary);
+            border: 2px solid var(--primary-solid, var(--primary));
+            color: var(--primary-solid, var(--primary));
             margin-left: 1rem;
         }
         
         .btn-outline:hover {
-            background: var(--primary);
+            background: var(--primary-solid, var(--primary));
             color: var(--dark);
-            border-color: var(--primary);
+            border-color: var(--primary-solid, var(--primary));
         }
         
         .btn-group {
@@ -506,6 +611,17 @@
                 0 0 80px rgba(251, 237, 82, 0.15);
             filter: blur(1px);
         }
+        
+        [data-theme="light"] .hero-image::before {
+            background: radial-gradient(circle, 
+                rgba(255, 157, 0, 0.3) 0%, 
+                rgba(255, 157, 0, 0.2) 30%, 
+                rgba(255, 157, 0, 0.1) 60%, 
+                transparent 80%);
+            box-shadow: 
+                0 0 40px rgba(255, 157, 0, 0.3),
+                0 0 80px rgba(255, 157, 0, 0.15);
+        }
 
         .hero-image img {
             width: 260px;
@@ -519,6 +635,14 @@
                 inset 0 0 15px rgba(251, 237, 82, 0.15);
             transition: all 0.5s cubic-bezier(0.25, 0.8, 0.25, 1);
         }
+        
+        [data-theme="light"] .hero-image img {
+            border: 3px solid rgba(255, 157, 0, 0.4);
+            box-shadow: 
+                0 0 20px rgba(255, 157, 0, 0.2),
+                0 0 40px rgba(255, 157, 0, 0.15),
+                inset 0 0 15px rgba(255, 157, 0, 0.15);
+        }
 
         .hero-image img:hover {
             transform: translateY(-5px) scale(1.02);
@@ -526,6 +650,13 @@
                 0 0 30px rgba(251, 237, 82, 0.3),
                 0 0 60px rgba(251, 237, 82, 0.2),
                 inset 0 0 20px rgba(251, 237, 82, 0.2);
+        }
+        
+        [data-theme="light"] .hero-image img:hover {
+            box-shadow: 
+                0 0 30px rgba(255, 157, 0, 0.3),
+                0 0 60px rgba(255, 157, 0, 0.2),
+                inset 0 0 20px rgba(255, 157, 0, 0.2);
         }
         
         /* Sections */
@@ -565,7 +696,7 @@
             position: absolute;
             width: 50px;
             height: 3px;
-            background: linear-gradient(to right, var(--primary), var(--secondary));
+            background: var(--primary);
             bottom: -12px;
             left: 50%;
             transform: translateX(-50%);
@@ -599,6 +730,10 @@
             text-align: center;
         }
         
+        [data-theme="light"] .about-text p {
+            color: rgba(33, 37, 41, 0.8);
+        }
+        
         .skills {
             display: flex;
             flex-wrap: wrap;
@@ -619,14 +754,25 @@
             transition: var(--transition);
         }
         
+        [data-theme="light"] .skill {
+            border: 1px solid rgba(0, 0, 0, 0.08);
+        }
+
         .skill:hover {
             transform: translateY(-3px);
             box-shadow: var(--box-shadow);
             border-color: rgba(251, 237, 82, 0.3);
         }
         
+        [data-theme="light"] .skill:hover {
+            border-color: rgba(255, 157, 0, 0.3);
+        }
+
         .skill i {
-            color: var(--primary);
+            background: var(--primary);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
             font-size: 0.9rem;
         }
         
@@ -656,7 +802,11 @@
             border: 1px solid rgba(255, 255, 255, 0.1);
         }
         
-         /* Experience Section */
+        [data-theme="light"] .about-image img {
+            border: 1px solid rgba(0, 0, 0, 0.1);
+        }
+        
+        /* Experience Section */
         .experience-container {
             display: flex;
             flex-direction: column;
@@ -672,17 +822,25 @@
             transition: var(--transition);
             position: relative;
             overflow: hidden;
-            border-left: 4px solid var(--primary);
+            border-left: 4px solid var(--primary-solid, var(--primary));
             box-shadow: var(--box-shadow);
             border: 1px solid rgba(255, 255, 255, 0.08);
         }
         
+        [data-theme="light"] .experience-item {
+            border: 1px solid rgba(0, 0, 0, 0.08);
+        }
+
         .experience-item:hover {
             transform: translateY(-8px);
             box-shadow: 0 15px 35px rgba(0, 0, 0, 0.2);
             border-color: rgba(251, 237, 82, 0.3);
         }
         
+        [data-theme="light"] .experience-item:hover {
+            border-color: rgba(255, 157, 0, 0.3);
+        }
+
         .experience-item::before {
             content: '';
             position: absolute;
@@ -694,6 +852,10 @@
             z-index: 0;
         }
         
+        [data-theme="light"] .experience-item::before {
+            background: linear-gradient(135deg, rgba(255, 157, 0, 0.05) 0%, transparent 100%);
+        }
+
         .experience-header {
             display: flex;
             justify-content: space-between;
@@ -706,7 +868,10 @@
         
         .experience-header h3 {
             font-size: 1.3rem;
-            color: var(--primary);
+            background: var(--primary);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
             font-weight: 600;
         }
         
@@ -718,6 +883,10 @@
             border-radius: 50px;
         }
         
+        [data-theme="light"] .experience-date {
+            background: rgba(0, 0, 0, 0.05);
+        }
+
         .experience-company {
             font-weight: 600;
             margin-bottom: 1rem;
@@ -751,11 +920,15 @@
             line-height: 1.7;
         }
         
+        [data-theme="light"] .experience-description li {
+            color: rgba(33, 37, 41, 0.8);
+        }
+
         .experience-description li::before {
             content: '▹';
             position: absolute;
             left: 0;
-            color: var(--primary);
+            color: var(--primary-solid, var(--primary));
             font-size: 1.1rem;
         }
 
@@ -775,6 +948,10 @@
             background: radial-gradient(circle at 70% 30%, rgba(251, 237, 82, 0.08) 0%, transparent 60%);
             z-index: 0;
         }
+        
+        [data-theme="light"] #skills::before {
+            background: radial-gradient(circle at 70% 30%, rgba(255, 157, 0, 0.08) 0%, transparent 60%);
+        }
 
         .skills-container {
             display: grid;
@@ -790,15 +967,23 @@
             transition: var(--transition);
             position: relative;
             overflow: hidden;
-            border-left: 3px solid var(--primary);
+            border-left: 3px solid var(--primary-solid, var(--primary));
             box-shadow: var(--box-shadow);
             border: 1px solid rgba(255, 255, 255, 0.08);
+        }
+        
+        [data-theme="light"] .skills-category {
+            border: 1px solid rgba(0, 0, 0, 0.08);
         }
 
         .skills-category:hover {
             transform: translateY(-5px);
             box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
             border-color: rgba(251, 237, 82, 0.3);
+        }
+        
+        [data-theme="light"] .skills-category:hover {
+            border-color: rgba(255, 157, 0, 0.3);
         }
 
         .skills-category::before {
@@ -811,9 +996,16 @@
             background: linear-gradient(135deg, rgba(251, 237, 82, 0.05) 0%, transparent 100%);
             z-index: 0;
         }
+        
+        [data-theme="light"] .skills-category::before {
+            background: linear-gradient(135deg, rgba(255, 157, 0, 0.05) 0%, transparent 100%);
+        }
 
         .skills-category h3 {
-            color: var(--primary);
+            background: var(--primary);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
             margin-bottom: 1.2rem;
             font-size: 1.1rem;
             display: flex;
@@ -843,15 +1035,28 @@
             border: 1px solid rgba(255, 255, 255, 0.08);
             font-size: 0.95rem;
         }
+        
+        [data-theme="light"] .skill-item {
+            background: rgba(0, 0, 0, 0.05);
+            border: 1px solid rgba(0, 0, 0, 0.08);
+        }
 
         .skill-item:hover {
             background: rgba(251, 237, 82, 0.1);
             transform: translateX(3px);
             box-shadow: 0 3px 10px rgba(251, 237, 82, 0.1);
         }
+        
+        [data-theme="light"] .skill-item:hover {
+            background: rgba(255, 157, 0, 0.1);
+            box-shadow: 0 3px 10px rgba(255, 157, 0, 0.1);
+        }
 
         .skill-item i {
-            color: var(--primary);
+            background: var(--primary);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
             font-size: 1rem;
             width: 22px;
             text-align: center;
@@ -880,12 +1085,20 @@
             position: relative;
         }
         
+        [data-theme="light"] .project-card {
+            border: 1px solid rgba(0, 0, 0, 0.08);
+        }
+
         .project-card:hover {
             transform: translateY(-5px);
             box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
             border-color: rgba(251, 237, 82, 0.3);
         }
         
+        [data-theme="light"] .project-card:hover {
+            border-color: rgba(255, 157, 0, 0.3);
+        }
+
         .project-image {
             height: 180px;
             overflow: hidden;
@@ -921,7 +1134,7 @@
         .project-content h3 {
             font-size: 1.2rem;
             margin-bottom: 0.7rem;
-            color: #ffffff;
+            color: var(--light);
             font-weight: 600;
         }
         
@@ -932,6 +1145,10 @@
             line-height: 1.6;
         }
         
+        [data-theme="light"] .project-content p {
+            color: rgba(33, 37, 41, 0.7);
+        }
+
         .project-tools {
             display: flex;
             flex-wrap: wrap;
@@ -948,6 +1165,11 @@
             border: 1px solid rgba(251, 237, 82, 0.15);
         }
         
+        [data-theme="light"] .project-tool {
+            background: rgba(255, 157, 0, 0.15);
+            border: 1px solid rgba(255, 157, 0, 0.15);
+        }
+
         .project-links {
             display: flex;
             gap: 1.2rem;
@@ -988,17 +1210,29 @@
             box-shadow: var(--box-shadow);
             border: 1px solid rgba(255, 255, 255, 0.08);
         }
+        
+        [data-theme="light"] .certification-card {
+            border: 1px solid rgba(0, 0, 0, 0.08);
+        }
 
         .certification-card:hover {
             transform: translateY(-5px);
             box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
             border-color: rgba(251, 237, 82, 0.3);
         }
+        
+        [data-theme="light"] .certification-card:hover {
+            border-color: rgba(255, 157, 0, 0.3);
+        }
 
         .certification-image {
             height: 180px;
             overflow: hidden;
             border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+        }
+        
+        [data-theme="light"] .certification-image {
+            border-bottom: 1px solid rgba(0, 0, 0, 0.08);
         }
 
         .certification-image img {
@@ -1019,7 +1253,7 @@
         .certification-content h3 {
             font-size: 1.1rem;
             margin-bottom: 0.5rem;
-            color: #ffffff;
+            color: var(--light);
         }
 
         .certification-issuer {
@@ -1041,12 +1275,16 @@
             font-size: 0.85rem;
             line-height: 1.5;
         }
+        
+        [data-theme="light"] .certification-details li {
+            color: rgba(33, 37, 41, 0.8);
+        }
 
         .certification-details li::before {
             content: '▹';
             position: absolute;
             left: 0;
-            color: var(--primary);
+            color: var(--primary-solid, var(--primary));
             font-size: 0.9rem;
         }
 
@@ -1072,130 +1310,140 @@
             transform: translateX(5px);
         }
 
-
         /* Achievements Section */
-.achievements-container {
-    display: flex;
-    flex-direction: column;
-    gap: 1.5rem;
-    max-width: 100%;
-    margin: 0 auto;
-}
+        .achievements-container {
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+            max-width: 100%;
+            margin: 0 auto;
+        }
 
-.achievements-row {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-    gap: 1.5rem;
-    justify-content: center;
-}
+        .achievements-row {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 1.5rem;
+            justify-content: center;
+        }
 
-.achievement-card {
-    background: var(--card-bg);
-    border-radius: var(--border-radius);
-    padding: 1.5rem;
-    transition: var(--transition);
-    border-left: 3px solid var(--primary);
-    box-shadow: var(--box-shadow);
-    border: 1px solid rgba(255, 255, 255, 0.08);
-    height: 100%;
-    display: flex;
-    flex-direction: column;
-}
+        .achievement-card {
+            background: var(--card-bg);
+            border-radius: var(--border-radius);
+            padding: 1.5rem;
+            transition: var(--transition);
+            border-left: 3px solid var(--primary-solid, var(--primary));
+            box-shadow: var(--box-shadow);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+        }
+        
+        [data-theme="light"] .achievement-card {
+            border: 1px solid rgba(0, 0, 0, 0.08);
+        }
 
-.achievement-card:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
-    border-color: rgba(251, 237, 82, 0.3);
-}
+        .achievement-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
+            border-color: rgba(251, 237, 82, 0.3);
+        }
+        
+        [data-theme="light"] .achievement-card:hover {
+            border-color: rgba(255, 157, 0, 0.3);
+        }
 
-.achievement-icon {
-    width: 60px;
-    height: 60px;
-    border-radius: 50%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 1.5rem;
-    margin-bottom: 1rem;
-    background: rgba(251, 237, 82, 0.1);
-    color: var(--primary);
-}
+        .achievement-icon {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+            background: rgba(251, 237, 82, 0.1);
+            color: var(--primary-solid, var(--primary));
+        }
 
-.achievement-icon.gold {
-    background: rgba(255, 215, 0, 0.1);
-    color: gold;
-}
+        .achievement-icon.gold {
+            background: rgba(255, 215, 0, 0.1);
+            color: gold;
+        }
 
-.achievement-icon.blue {
-    background: rgba(30, 144, 255, 0.1);
-    color: dodgerblue;
-}
+        .achievement-icon.blue {
+            background: rgba(30, 144, 255, 0.1);
+            color: dodgerblue;
+        }
 
-.achievement-icon.purple {
-    background: rgba(147, 112, 219, 0.1);
-    color: mediumpurple;
-}
+        .achievement-icon.purple {
+            background: rgba(147, 112, 219, 0.1);
+            color: mediumpurple;
+        }
 
-.achievement-icon.silver {
-    background: rgba(192, 192, 192, 0.1); 
-    color: silver; 
-}
+        .achievement-icon.silver {
+            background: rgba(192, 192, 192, 0.1); 
+            color: silver; 
+        }
 
-.achievement-icon.bronze {
-    background: rgba(205, 127, 50, 0.1); 
-    color: #CD7F32; 
-}
+        .achievement-icon.bronze {
+            background: rgba(205, 127, 50, 0.1); 
+            color: #CD7F32; 
+        }
 
-.achievement-content {
-    flex: 1;
-}
+        .achievement-content {
+            flex: 1;
+        }
 
-.achievement-content h3 {
-    font-size: 1.1rem;
-    margin-bottom: 0.5rem;
-    color: #ffffff;
-}
+        .achievement-content h3 {
+            font-size: 1.1rem;
+            margin-bottom: 0.5rem;
+            color: var(--light);
+        }
 
-.achievement-issuer {
-    color: var(--gray);
-    font-size: 0.85rem;
-    margin-bottom: 0.8rem;
-    font-weight: 500;
-}
+        .achievement-issuer {
+            color: var(--gray);
+            font-size: 0.85rem;
+            margin-bottom: 0.8rem;
+            font-weight: 500;
+        }
 
-.achievement-details {
-    list-style: none;
-}
+        .achievement-details {
+            list-style: none;
+        }
 
-.achievement-details li {
-    margin-bottom: 0.5rem;
-    position: relative;
-    padding-left: 1.2rem;
-    color: rgba(240, 240, 245, 0.8);
-    font-size: 0.85rem;
-    line-height: 1.5;
-}
+        .achievement-details li {
+            margin-bottom: 0.5rem;
+            position: relative;
+            padding-left: 1.2rem;
+            color: rgba(240, 240, 245, 0.8);
+            font-size: 0.85rem;
+            line-height: 1.5;
+        }
+        
+        [data-theme="light"] .achievement-details li {
+            color: rgba(33, 37, 41, 0.8);
+        }
 
-.achievement-details li::before {
-    content: '▹';
-    position: absolute;
-    left: 0;
-    color: var(--primary);
-    font-size: 0.9rem;
-}
+        .achievement-details li::before {
+            content: '▹';
+            position: absolute;
+            left: 0;
+            color: var(--primary-solid, var(--primary));
+            font-size: 0.9rem;
+        }
 
-@media (min-width: 768px) {
-    .achievements-row {
-        grid-template-columns: repeat(3, 1fr);
-    }
-}
+        @media (min-width: 768px) {
+            .achievements-row {
+                grid-template-columns: repeat(3, 1fr);
+            }
+        }
 
-@media (max-width: 767px) {
-    .achievements-row {
-        grid-template-columns: 1fr;
-    }
-}
-
+        @media (max-width: 767px) {
+            .achievements-row {
+                grid-template-columns: 1fr;
+            }
+        }
 
         /* Contact Section */
         .contact-container {
@@ -1225,6 +1473,10 @@
             text-align: center;
         }
         
+        [data-theme="light"] .contact-info p {
+            color: rgba(33, 37, 41, 0.8);
+        }
+
         .contact-details {
             display: flex;
             flex-direction: column;
@@ -1246,14 +1498,21 @@
             align-items: center;
             justify-content: center;
             font-size: 1.2rem;
-            color: var(--primary);
+            background: var(--primary);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
             flex-shrink: 0;
             border: 1px solid rgba(255, 255, 255, 0.08);
             transition: var(--transition);
         }
         
+        [data-theme="light"] .contact-icon {
+            border: 1px solid rgba(0, 0, 0, 0.08);
+        }
+
         .contact-item:hover .contact-icon {
-            background: var(--primary);
+            background: var(--primary-solid, var(--primary));
             color: var(--dark);
             transform: translateY(-3px);
             box-shadow: 0 8px 20px rgba(251, 237, 82, 0.2);
@@ -1274,7 +1533,10 @@
         }
         
         .contact-text a:hover {
-            color: var(--primary);
+            background: var(--primary);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
         }
         
         .contact-form {
@@ -1286,6 +1548,10 @@
             border: 1px solid rgba(255, 255, 255, 0.08);
         }
         
+        [data-theme="light"] .contact-form {
+            border: 1px solid rgba(0, 0, 0, 0.08);
+        }
+
         .form-group {
             margin-bottom: 1.2rem;
         }
@@ -1309,13 +1575,23 @@
             transition: var(--transition);
         }
         
+        [data-theme="light"] .form-group input,
+        [data-theme="light"] .form-group textarea {
+            border: 1px solid rgba(0, 0, 0, 0.08);
+        }
+
         .form-group input:focus,
         .form-group textarea:focus {
             outline: none;
-            border-color: var(--primary);
+            border-color: var(--primary-solid, var(--primary));
             box-shadow: 0 0 0 3px rgba(251, 237, 82, 0.1);
         }
         
+        [data-theme="light"] .form-group input:focus,
+        [data-theme="light"] .form-group textarea:focus {
+            box-shadow: 0 0 0 3px rgba(255, 157, 0, 0.1);
+        }
+
         .form-group textarea {
             min-height: 140px;
             resize: vertical;
@@ -1329,6 +1605,10 @@
             border-top: 1px solid rgba(255, 255, 255, 0.08);
         }
         
+        [data-theme="light"] footer {
+            border-top: 1px solid rgba(0, 0, 0, 0.08);
+        }
+
         .footer-content {
             display: flex;
             flex-direction: column;
@@ -1339,7 +1619,10 @@
         .footer-logo {
             font-size: 1.5rem;
             font-weight: 700;
-            color: var(--primary);
+            background: var(--primary);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
             display: flex;
             align-items: center;
             gap: 0.5rem;
@@ -1360,7 +1643,10 @@
         }
         
         .footer-links a:hover {
-            color: var(--primary);
+            background: var(--primary);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
             transform: translateY(-3px);
         }
         
@@ -1383,8 +1669,12 @@
             border: 1px solid rgba(255, 255, 255, 0.1);
         }
         
+        [data-theme="light"] .social-links-footer a {
+            border: 1px solid rgba(0, 0, 0, 0.1);
+        }
+
         .social-links-footer a:hover {
-            background: var(--primary);
+            background: var(--primary-solid, var(--primary));
             color: var(--dark);
             transform: translateY(-3px);
             box-shadow: 0 8px 15px rgba(251, 237, 82, 0.2);
@@ -1430,57 +1720,81 @@
             }
         }
         
-       /* Enhanced pulse animation for profile circle */
-        @keyframes pulse {
-            0% {
-                transform: scale(0.98);
-                opacity: 0.8;
-                box-shadow: 
-                    0 0 60px rgba(251, 237, 82, 0.4),
-                    0 0 120px rgba(251, 237, 82, 0.2);
-            }
-            50% {
-                transform: scale(1.02);
-                opacity: 1;
-                box-shadow: 
-                    0 0 80px rgba(251, 237, 82, 0.6),
-                    0 0 140px rgba(251, 237, 82, 0.3);
-            }
-            100% {
-                transform: scale(0.98);
-                opacity: 0.8;
-                box-shadow: 
-                    0 0 60px rgba(251, 237, 82, 0.4),
-                    0 0 120px rgba(251, 237, 82, 0.2);
-            }
-        }
-        
-        .animate {
-            opacity: 0;
-            transform: translateY(30px);
-        }
-        
-        .fade-in {
-            animation: fadeInUp 0.8s ease forwards;
-        }
-        
-        .delay-1 {
-            animation-delay: 0.1s;
-        }
-        
-        .delay-2 {
-            animation-delay: 0.2s;
-        }
-        
-        .delay-3 {
-            animation-delay: 0.3s;
-        }
-        
-        .delay-4 {
-            animation-delay: 0.4s;
-        }
+       /* ===== DARK MODE (DEFAULT) – YELLOW PULSE ===== */
+@keyframes pulse-yellow {
+    0% {
+        transform: scale(0.98);
+        opacity: 0.8;
+        box-shadow:
+            0 0 60px rgba(251, 237, 82, 0.4),
+            0 0 120px rgba(251, 237, 82, 0.2);
+    }
+    50% {
+        transform: scale(1.02);
+        opacity: 1;
+        box-shadow:
+            0 0 80px rgba(251, 237, 82, 0.6),
+            0 0 140px rgba(251, 237, 82, 0.3);
+    }
+    100% {
+        transform: scale(0.98);
+        opacity: 0.8;
+        box-shadow:
+            0 0 60px rgba(251, 237, 82, 0.4),
+            0 0 120px rgba(251, 237, 82, 0.2);
+    }
+}
 
-        
+/* ===== LIGHT MODE – ORANGE PULSE ===== */
+@keyframes pulse-orange {
+    0% {
+        transform: scale(0.98);
+        opacity: 0.8;
+        box-shadow:
+            0 0 60px rgba(255, 157, 0, 0.45),
+            0 0 120px rgba(255, 157, 0, 0.25);
+    }
+    50% {
+        transform: scale(1.02);
+        opacity: 1;
+        box-shadow:
+            0 0 80px rgba(255, 157, 0, 0.65),
+            0 0 140px rgba(255, 157, 0, 0.35);
+    }
+    100% {
+        transform: scale(0.98);
+        opacity: 0.8;
+        box-shadow:
+            0 0 60px rgba(255, 157, 0, 0.45),
+            0 0 120px rgba(255, 157, 0, 0.25);
+    }
+}
+
+/* ===== APPLY ANIMATION ===== */
+.hero-image::before {
+    animation: pulse-yellow 4s infinite ease-in-out;
+}
+
+/* Switch to ORANGE when light mode is active */
+[data-theme="light"] .hero-image::before {
+    animation: pulse-orange 4s infinite ease-in-out;
+}
+
+/* ===== OTHER ANIMATIONS (UNCHANGED) ===== */
+.animate {
+    opacity: 0;
+    transform: translateY(30px);
+}
+
+.fade-in {
+    animation: fadeInUp 0.8s ease forwards;
+}
+
+.delay-1 { animation-delay: 0.1s; }
+.delay-2 { animation-delay: 0.2s; }
+.delay-3 { animation-delay: 0.3s; }
+.delay-4 { animation-delay: 0.4s; }
+
 
         /* Data Analysis Elements */
         .data-visual {
@@ -1488,7 +1802,10 @@
             opacity: 0.03;
             z-index: -1;
             font-size: 3rem;
-            color: var(--primary);
+            background: var(--primary);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
             animation: float 15s infinite ease-in-out;
         }
 
@@ -1517,7 +1834,7 @@
             position: absolute;
             width: 100%;
             height: 2px;
-            background: linear-gradient(90deg, var(--primary), var(--secondary));
+            background: var(--primary);
             bottom: -5px;
             left: 0;
             transform: scaleX(0);
@@ -1544,6 +1861,10 @@
             backdrop-filter: blur(5px);
             animation: fadeIn 0.3s ease-out;
         }
+        
+        [data-theme="light"] .project-modal {
+            background-color: rgba(248, 249, 250, 0.95);
+        }
 
         @keyframes fadeIn {
             from { opacity: 0; }
@@ -1561,6 +1882,10 @@
             border: 1px solid rgba(251, 237, 82, 0.2);
             position: relative;
             animation: modalSlideIn 0.4s ease-out;
+        }
+        
+        [data-theme="light"] .modal-content {
+            border: 1px solid rgba(255, 157, 0, 0.2);
         }
 
         @keyframes modalSlideIn {
@@ -1588,7 +1913,10 @@
         }
 
         .close-modal:hover {
-            color: var(--primary);
+            background: var(--primary);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
             transform: rotate(90deg);
         }
 
@@ -1597,9 +1925,16 @@
             padding-bottom: 1.5rem;
             border-bottom: 1px solid rgba(255, 255, 255, 0.1);
         }
+        
+        [data-theme="light"] .modal-header {
+            border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+        }
 
         .modal-header h2 {
-            color: var(--primary);
+            background: var(--primary);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
             font-size: 2rem;
             margin-bottom: 0.5rem;
             text-align: center;
@@ -1630,7 +1965,7 @@
             position: absolute;
             width: 40px;
             height: 2px;
-            background: linear-gradient(to right, var(--primary), var(--secondary));
+            background: var(--primary);
             bottom: -8px;
             left: 0;
         }
@@ -1642,6 +1977,11 @@
             margin-bottom: 1.2rem;
             font-size: 0.95rem;
         }
+        
+        [data-theme="light"] .modal-section p,
+        [data-theme="light"] .modal-section ul {
+            color: rgba(33, 37, 41, 0.8);
+        }
 
         .modal-section ul {
             padding-left: 1.5rem;
@@ -1651,8 +1991,6 @@
             margin-bottom: 0.8rem;
             position: relative;
         }
-
-        
 
         /* Video Container */
         .video-container {
@@ -1665,6 +2003,10 @@
             background: var(--darker);
             border: 1px solid rgba(255, 255, 255, 0.1);
         }
+        
+        [data-theme="light"] .video-container {
+            border: 1px solid rgba(0, 0, 0, 0.1);
+        }
 
         .video-container iframe {
             position: absolute;
@@ -1674,6 +2016,15 @@
             height: 100%;
             border: none;
         }
+
+        video {
+  width: 100%;
+  height: auto;
+  max-width: 100%;
+  aspect-ratio: 16 / 9;
+  object-fit: contain;
+  display: block;
+}
 
         /* Dashboard Images */
         .dashboard-images {
@@ -1690,10 +2041,18 @@
             box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
             transition: var(--transition);
         }
+        
+        [data-theme="light"] .dashboard-image {
+            border: 1px solid rgba(0, 0, 0, 0.1);
+        }
 
         .dashboard-image:hover {
             transform: translateY(-5px);
             box-shadow: 0 10px 25px rgba(251, 237, 82, 0.1);
+        }
+        
+        [data-theme="light"] .dashboard-image:hover {
+            box-shadow: 0 10px 25px rgba(255, 157, 0, 0.1);
         }
 
         .dashboard-image img {
@@ -1731,6 +2090,19 @@
         .modal-tool i {
             font-size: 0.9rem;
         }
+        
+        [data-theme="light"] .modal-tool {
+            background: rgba(255, 157, 0, 0.15);
+            border: 1px solid rgba(255, 157, 0, 0.15);
+        }
+
+        
+        
+        [data-theme="light"] .modal-tool:hover {
+            background: rgba(255, 157, 0, 0.25);
+        }
+
+        
 
         /* Back Button */
         .back-to-portfolio {
@@ -1752,15 +2124,6 @@
         .back-to-portfolio:hover i {
             transform: translateX(-5px);
         }
-
-        video {
-  width: 100%;
-  height: auto;
-  max-width: 100%;
-  aspect-ratio: 16 / 9;
-  object-fit: contain;
-  display: block;
-}
 
         /* Responsive adjustments for modals */
         @media (max-width: 768px) {
@@ -1985,10 +2348,24 @@
                 margin-left: 0;
                 margin-top: 1rem;
             }
+            
+            /* Adjust theme toggle position on mobile */
+            .theme-toggle {
+                position: absolute;
+                right: 60px;
+                top: 50%;
+                transform: translateY(-50%);
+            }
+        }
+        
+        /* Additional mobile adjustments */
+        @media (max-width: 480px) {
+            .theme-toggle {
+                width: 45px;
+                height: 45px;
+            }
         }
     </style>
-
-    
 
 <!-- Google tag (gtag.js) -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-YE73VXT4Z1"></script>
@@ -2002,31 +2379,34 @@
 
 </head>
 <body>
-   
-
     <!-- Header -->
     <header id="header">
         <div class="container header-container">
             <a href="#" class="logo"><i class="fas fa-chart-line"></i>Omar<span>Hamdy</span></a>
-            <nav>
+            <div class="header-nav-container">
+                <nav>
+                    <ul class="nav-links" id="navLinks">
+                        <a href="#home">Home</a>
+                        <a href="#about">About</a>
+                        <a href="#experience">Experience</a>
+                        <a href="#skills">Skills</a>
+                        <a href="#projects">Projects</a>
+                        <a href="#certifications">Certifications</a>
+                        <a href="#achievements">Achievements</a>
+                        <a href="#contact">Contact</a>
+                    </ul>
+                </nav>
+                <!-- Theme Toggle Button -->
+                <div class="theme-toggle" id="themeToggle">
+                    <i class="fas fa-moon" id="themeIcon"></i>
+                </div>
                 <div class="hamburger" id="hamburger">
                     <i class="fas fa-bars" id="menu-icon"></i>
                     <i class="fas fa-times" id="close-icon" style="display: none;"></i>
                 </div>
-                <ul class="nav-links" id="navLinks">
-    <a href="#home">Home</a>
-    <a href="#about">About</a>
-    <a href="#experience">Experience</a>
-    <a href="#skills">Skills</a>
-    <a href="#projects">Projects</a>
-    <a href="#certifications">Certifications</a>
-    <a href="#achievements">Achievements</a>
-    <a href="#contact">Contact</a>
-</ul>
-            </nav>
+            </div>
         </div>
     </header>
-
 
     <!-- Mobile Sidebar -->
     <aside class="mobile-sidebar" id="mobileSidebar">
@@ -2043,8 +2423,6 @@
             </h1>
             <span>Data Analyst</span>
         </div>
-
-       
 
         <nav class="sidebar-nav">
             <a href="#home" class="sidebar-link active"><i class="fa-solid fa-house"></i> Home</a>
@@ -2075,8 +2453,7 @@
         </div>
     </aside>
 
-<div class="sidebar-overlay" id="sidebarOverlay"></div>
-
+    <div class="sidebar-overlay" id="sidebarOverlay"></div>
 
     <!-- Hero Section -->
     <section class="hero" id="home">
@@ -2086,24 +2463,24 @@
                 <h2 class="animate fade-in delay-1"><span class="highlight"></span>Data Analyst | Business Intelligence Analyst</h2>
                 <p class="animate fade-in delay-2">Analytical and detail-oriented professional with expertise in data cleaning, transformation, and visualization. Passionate about using data to optimize business performance and drive strategic decisions.</p>
                 <div class="social-links animate fade-in delay-3">
-                            <a href="mailto:omarhamdi328@gmail.com" target="_blank" title="Email">
-                            <i class="fas fa-envelope"></i>
-                            </a>
-                            <a href="tel:+201118938276" target="_blank" title="Call">
-                            <i class="fas fa-phone"></i>
-                            </a>
-                            <a href="https://www.linkedin.com/in/omarhamdy3" target="_blank" title="LinkedIn">
-                            <i class="fab fa-linkedin-in"></i>
-                            </a>
-                            <a href="https://github.com/OmarHamdy3" target="_blank" title="GitHub">
-                            <i class="fab fa-github"></i>
-                            </a>
-                            <a href="https://drive.google.com/file/d/1FlDebD6CheOQZfdEfqm0Je7jkq2UKHKb/view?usp=sharing" target="_blank" title="CV">
-                            <i class="fas fa-file-alt"></i>
-                            </a>
-                            <a href="https://wa.me/201118938276" target="_blank" title="WhatsApp">
-                            <i class="fab fa-whatsapp"></i>
-                            </a>
+                    <a href="mailto:omarhamdi328@gmail.com" target="_blank" title="Email">
+                        <i class="fas fa-envelope"></i>
+                    </a>
+                    <a href="tel:+201118938276" target="_blank" title="Call">
+                        <i class="fas fa-phone"></i>
+                    </a>
+                    <a href="https://www.linkedin.com/in/omarhamdy3" target="_blank" title="LinkedIn">
+                        <i class="fab fa-linkedin-in"></i>
+                    </a>
+                    <a href="https://github.com/OmarHamdy3" target="_blank" title="GitHub">
+                        <i class="fab fa-github"></i>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1FlDebD6CheOQZfdEfqm0Je7jkq2UKHKb/view?usp=sharing" target="_blank" title="CV">
+                        <i class="fas fa-file-alt"></i>
+                    </a>
+                    <a href="https://wa.me/201118938276" target="_blank" title="WhatsApp">
+                        <i class="fab fa-whatsapp"></i>
+                    </a>
                 </div>
                 <div class="btn-group animate fade-in delay-4">
                     <a href="#contact" class="btn"><i class="fas fa-paper-plane"></i> Contact Me</a>
@@ -2116,9 +2493,6 @@
         </div>
     </section>
 
-
-     
-
     <!-- About Section -->
     <section class="section" id="about">
         <div class="section-container">
@@ -2127,17 +2501,15 @@
             </div>
             <div class="about-content">
                 <div class="about-text animate fade-in">
-                       <h3>Transforming Data into Actionable Insights</h3>
+                    <h3>Transforming Data into Actionable Insights</h3>
                     <p>I'm a passionate data professional with expertise in transforming raw data into meaningful insights. My journey in data analysis has equipped me with the skills to clean, analyze, and visualize data effectively to support business decisions.</p>
                     <p>Proficient in Excel, SQL, Python, Power BI, and Tableau, I have a strong ability to extract insights and present data through interactive dashboards. I'm constantly learning and adapting to new technologies in the data field.</p>
-                
                 </div>
             </div>
         </div>
     </section>
 
-
-        <!-- Experience Section -->
+    <!-- Experience Section -->
     <section class="section" id="experience">
         <div class="container">
             <div class="section-title">
@@ -2177,472 +2549,467 @@
         </div>
     </section>
 
-      <!-- Skills Section -->
-<section class="section" id="skills">
-    <div class="container">
-        <div class="section-title">
-            <h2>My Skills</h2>
-        </div>
-
-        <div class="skills-container">
-            <!-- Programming & Querying -->
-            <div class="skills-category animate fade-in">
-                <h3><i class="fas fa-laptop-code"></i> Programming & Querying</h3>
-                <div class="skills-list">
-                    <div class="skill-item"><i class="fab fa-python"></i> Python</div>
-                    <div class="skill-item"><i class="fas fa-database"></i> SQL</div>
-                </div>
-            </div>
-            
-            <!-- Spreadsheet Skills -->
-            <div class="skills-category animate fade-in delay-1">
-                <h3><i class="fas fa-file-excel"></i> Spreadsheet Skills</h3>
-                <div class="skills-list">
-                    <div class="skill-item"><i class="fas fa-file-excel"></i> Excel</div>
-                    <div class="skill-item"><i class="fas fa-table"></i> Pivot Tables</div>
-                    <div class="skill-item"><i class="fas fa-random"></i> Power Query</div>
-                    <div class="skill-item"><i class="fas fa-project-diagram"></i> Power Pivot</div>
-                </div>
-            </div>
-            
-           <!-- Dashboard Creation -->
-<div class="skills-category animate fade-in delay-2">
-    <h3><i class="fas fa-tachometer-alt"></i> Dashboard Creation</h3>
-    <div class="skills-list">
-        <div class="skill-item"><i class="fas fa-chart-line"></i> Interactive Reports</div>
-        <div class="skill-item"><i class="fas fa-bullseye"></i> KPI Tracking</div>
-        <div class="skill-item"><i class="fas fa-robot"></i> Automated Dashboards</div>
-    </div>
-</div>
-            
-            <!-- Data Visualization -->
-            <div class="skills-category animate fade-in delay-3">
-                <h3><i class="fas fa-chart-bar"></i> Data Visualization</h3>
-                <div class="skills-list">
-                    <div class="skill-item"><i class="fas fa-chart-pie"></i> Power BI</div>
-                    <div class="skill-item"><i class="fas fa-chart-bar"></i> Tableau</div>
-                    <div class="skill-item"><i class="fas fa-file-excel"></i> Excel</div>
-                </div>
-            </div>
-            
-            <!-- Data Analysis -->
-            <div class="skills-category animate fade-in">
-                <h3><i class="fas fa-chart-line"></i> Data Analysis</h3>
-                <div class="skills-list">
-                    <div class="skill-item"><i class="fas fa-calculator"></i> DAX</div>
-                    <div class="skill-item"><i class="fas fa-chart-bar"></i> Statistical Analysis</div>
-                    <div class="skill-item"><i class="fas fa-chart-line"></i> Forecasting</div>
-                </div>
-            </div>
-            
-            <!-- Databases -->
-            <div class="skills-category animate fade-in delay-1">
-                <h3><i class="fas fa-server"></i> Databases</h3>
-                <div class="skills-list">
-                    <div class="skill-item"><i class="fas fa-database"></i> SQL Server</div>
-                </div>
-            </div>
-            
-            <!-- Data Preparation -->
-            <div class="skills-category animate fade-in delay-2">
-                <h3><i class="fas fa-wrench"></i> Data Preparation</h3>
-                <div class="skills-list">
-                    <div class="skill-item"><i class="fas fa-broom"></i> Data Cleaning</div>
-                    <div class="skill-item"><i class="fas fa-exchange-alt"></i> ETL</div>
-                    <div class="skill-item"><i class="fas fa-check-double"></i> Data Validation</div>
-                </div>
-            </div>
-        </div>
-    </div>
-</section>
-
-   <!-- Projects Section -->
-   <section class="section" id="projects">
-    <div class="container">
-        <div class="section-title">
-            <h2>Featured Projects</h2>
-        </div>
-        <div class="projects-container">
-            <div class="project-card animate fade-in">
-                <div class="project-image">
-                    <img src="new-folder/Superstore/Overview-Dashboard-Figma.png" alt="Superstore Sales Performance Analysis">
-                </div>
-                <div class="project-content">
-                    <h3>Superstore Business Performance Analysis</h3>
-                    <p>Analyzed sales data from 2014–2017 to identify trends, underperforming segments, and high-profit regions.</p>
-                    <div class="project-tools">
-                        <div class="project-tool">Python</div>
-                        <div class="project-tool">Tableau</div>
-                        <div class="project-tool">SQL</div>
-                        <div class="project-tool">Draw.io</div>
-                        <div class="project-tool">Figma</div>
-                        <div class="project-tool">Pandas</div>
-                    </div>
-                    <div class="project-links">
-                        <a href="#" class="project-details-btn" data-modal="superstore-modal"><i class="fas fa-external-link-alt"></i> Project Details</a>
-                        <a href="#"><i class="fab fa-github"></i> View Code</a>
-                    </div>
-                </div>
+    <!-- Skills Section -->
+    <section class="section" id="skills">
+        <div class="container">
+            <div class="section-title">
+                <h2>My Skills</h2>
             </div>
 
-            <div class="project-card animate fade-in delay-1">
-                <div class="project-image">
-                    <img src="new-folder/Road Accident/Main Sheet.png" alt="Road Accident Dashboard 1">
-                </div>
-                <div class="project-content">
-                    <h3>Road Accident Analysis</h3>
-                    <p>Built Excel dashboards to explore accident data trends across locations, time, and causes for safety planning.</p>
-                    <div class="project-tools">
-                        <div class="project-tool">Excel</div>
-                        <div class="project-tool">Power Query</div>
-                        <div class="project-tool">Power Pivot</div>
-                        <div class="project-tool">Pivot Tables</div>
+            <div class="skills-container">
+                <!-- Programming & Querying -->
+                <div class="skills-category animate fade-in">
+                    <h3><i class="fas fa-laptop-code"></i> Programming & Querying</h3>
+                    <div class="skills-list">
+                        <div class="skill-item"><i class="fab fa-python"></i> Python</div>
+                        <div class="skill-item"><i class="fas fa-database"></i> SQL</div>
                     </div>
-                    <div class="project-links">
-                        <a href="#" class="project-details-btn" data-modal="road-accident-modal"><i class="fas fa-external-link-alt"></i> Project Details</a>
-                        <a href="#"><i class="fab fa-github"></i> View Code</a>
+                </div>
+                
+                <!-- Spreadsheet Skills -->
+                <div class="skills-category animate fade-in delay-1">
+                    <h3><i class="fas fa-file-excel"></i> Spreadsheet Skills</h3>
+                    <div class="skills-list">
+                        <div class="skill-item"><i class="fas fa-file-excel"></i> Excel</div>
+                        <div class="skill-item"><i class="fas fa-table"></i> Pivot Tables</div>
+                        <div class="skill-item"><i class="fas fa-random"></i> Power Query</div>
+                        <div class="skill-item"><i class="fas fa-project-diagram"></i> Power Pivot</div>
+                    </div>
+                </div>
+                
+                <!-- Dashboard Creation -->
+                <div class="skills-category animate fade-in delay-2">
+                    <h3><i class="fas fa-tachometer-alt"></i> Dashboard Creation</h3>
+                    <div class="skills-list">
+                        <div class="skill-item"><i class="fas fa-chart-line"></i> Interactive Reports</div>
+                        <div class="skill-item"><i class="fas fa-bullseye"></i> KPI Tracking</div>
+                        <div class="skill-item"><i class="fas fa-robot"></i> Automated Dashboards</div>
+                    </div>
+                </div>
+                
+                <!-- Data Visualization -->
+                <div class="skills-category animate fade-in delay-3">
+                    <h3><i class="fas fa-chart-bar"></i> Data Visualization</h3>
+                    <div class="skills-list">
+                        <div class="skill-item"><i class="fas fa-chart-pie"></i> Power BI</div>
+                        <div class="skill-item"><i class="fas fa-chart-bar"></i> Tableau</div>
+                        <div class="skill-item"><i class="fas fa-file-excel"></i> Excel</div>
+                    </div>
+                </div>
+                
+                <!-- Data Analysis -->
+                <div class="skills-category animate fade-in">
+                    <h3><i class="fas fa-chart-line"></i> Data Analysis</h3>
+                    <div class="skills-list">
+                        <div class="skill-item"><i class="fas fa-calculator"></i> DAX</div>
+                        <div class="skill-item"><i class="fas fa-chart-bar"></i> Statistical Analysis</div>
+                        <div class="skill-item"><i class="fas fa-chart-line"></i> Forecasting</div>
+                    </div>
+                </div>
+                
+                <!-- Databases -->
+                <div class="skills-category animate fade-in delay-1">
+                    <h3><i class="fas fa-server"></i> Databases</h3>
+                    <div class="skills-list">
+                        <div class="skill-item"><i class="fas fa-database"></i> SQL Server</div>
+                    </div>
+                </div>
+                
+                <!-- Data Preparation -->
+                <div class="skills-category animate fade-in delay-2">
+                    <h3><i class="fas fa-wrench"></i> Data Preparation</h3>
+                    <div class="skills-list">
+                        <div class="skill-item"><i class="fas fa-broom"></i> Data Cleaning</div>
+                        <div class="skill-item"><i class="fas fa-exchange-alt"></i> ETL</div>
+                        <div class="skill-item"><i class="fas fa-check-double"></i> Data Validation</div>
                     </div>
                 </div>
             </div>
         </div>
     </section>
 
-   <!-- Certifications Section -->
-<section class="section" id="certifications">
-    <div class="container">
-        <div class="section-title">
-            <h2>Certifications</h2>
-        </div>
-        <div class="certifications-container">
-
-             <!-- Row 1 - 3 certificates -->
-            <div class="certifications-row">
-               <!-- Certification 1 -->
-                <div class="certification-card animate fade-in">
-                    <div class="certification-image">
-                        <img src="new-folder/Certificate/DEPI Certificate.jpg" alt="DEPI Certificate">
-                    </div>
-                    <div class="certification-content">
-                        <h3>Google Data Analyst Specialist</h3>
-                        <div class="certification-issuer">Digital Egypt Pioneers Initiative - DEPI</div>
-                        <ul class="certification-details">
-                            <li>Issued: Jul 2025</li>
-                        </ul>
-                    </div>
-                </div>
-
-          
-                <!-- Certification 2 -->
-                <div class="certification-card animate fade-in delay-1">
-                    <div class="certification-image">
-                        <img src="new-folder/Certificate/Link Program.jpg" alt="Data Analysis Certificate">
-                    </div>
-                    <div class="certification-content">
-                        <h3>Business Intelligence & Data Analysis</h3>
-                        <div class="certification-issuer">E-Youth</div>
-                        <ul class="certification-details">
-                            <li>Issued: Jun 2025</li>
-                        </ul>
-                    </div>
-                </div>
-
-
-                <!-- Certification 3 -->
-                <div class="certification-card animate fade-in delay-2">
-                    <div class="certification-image">
-                        <img src="new-folder/Certificate/ITIDA + Gigs.jpg" alt="ITIDA + Gigs Certificate">
-                    </div>
-                    <div class="certification-content">
-                        <h3>ITIDA Gigs (Freelance Training Program)</h3>
-                        <div class="certification-issuer">ITIDA + Gigs</div>
-                        <ul class="certification-details">
-                           <li>Issued: Jul 2025</li>
-                        </ul>
-                    </div>
-                </div>
+    <!-- Projects Section -->
+    <section class="section" id="projects">
+        <div class="container">
+            <div class="section-title">
+                <h2>Featured Projects</h2>
             </div>
-
-            
-            <!-- Row 1 - 3 certificates -->
-            <div class="certifications-row">
-                <!-- Certification 1 -->
-                <div class="certification-card animate fade-in">
-                    <div class="certification-image">
-                        <img src="new-folder/Certificate/Data Analysis Using Power BI.jpg" alt="Data Analyst using Power BI Certificate">
+            <div class="projects-container">
+                <div class="project-card animate fade-in">
+                    <div class="project-image">
+                        <img src="new-folder/Superstore/Overview-Dashboard-Figma.png" alt="Superstore Sales Performance Analysis">
                     </div>
-                    <div class="certification-content">
-                        <h3>Data Analysis Using Power BI</h3>
-                        <div class="certification-issuer">E-Youth</div>
-                        <ul class="certification-details">
-                            <li>Issued: Apr 2025</li>
-                        </ul>
-                    </div>
-                </div>
-          
-                <!-- Certification 2 -->
-                <div class="certification-card animate fade-in delay-1">
-                    <div class="certification-image">
-                        <img src="new-folder/Certificate/Data Analysis.jpg" alt="Data Analysis Certificate">
-                    </div>
-                    <div class="certification-content">
-                        <h3>Data Analysis</h3>
-                        <div class="certification-issuer">E-Youth</div>
-                        <ul class="certification-details">
-                             <li>Issued: Mar 2025</li>
-                        </ul>
-                    </div>
-                </div>
-
-                <!-- Certification 3 -->
-                <div class="certification-card animate fade-in delay-2">
-                    <div class="certification-image">
-                        <img src="new-folder/Certificate/Database Design.jpg" alt="Database Design Certificate">
-                    </div>
-                    <div class="certification-content">
-                        <h3>Database Design</h3>
-                        <div class="certification-issuer">E-Youth</div>
-                        <ul class="certification-details">
-                            <li>Issued: Feb 2025</li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
-            
-            <!-- Row 2 - 3 certificates -->
-            <div class="certifications-row">
-                <!-- Certification 4 -->
-                <div class="certification-card animate fade-in delay-3">
-                    <div class="certification-image">
-                        <img src="new-folder/Certificate/Introduction to Tableau_certificate.jpg" alt="Introduction to Tableau Certificate">
-                    </div>
-                    <div class="certification-content">
-                        <h3>Introduction to Tableau</h3>
-                        <div class="certification-issuer">DataCamp</div>
-                        <ul class="certification-details">
-                            <li>Issued: Mar 2024</li>
-                        </ul>
-                    </div>
-                </div>
-                
-                <!-- Certification 5 -->
-                <div class="certification-card animate fade-in">
-                    <div class="certification-image">
-                        <img src="new-folder/Certificate/Analyzing Data In Tableau_certificate.jpg" alt="Analyzing Data in Tableau Certificate">
-                    </div>
-                    <div class="certification-content">
-                        <h3>Analyzing Data in Tableau</h3>
-                        <div class="certification-issuer">DataCamp</div>
-                        <ul class="certification-details">
-                            <li>Issued: Mar 2024</li>
-                        </ul>
-                    </div>
-                </div>
-
-                <!-- Certification 6 -->
-                <div class="certification-card animate fade-in delay-1">
-                    <div class="certification-image">
-                        <img src="new-folder/Certificate/Introduction To SQL_certificate.jpg" alt="Introduction to SQL Certificate">
-                    </div>
-                    <div class="certification-content">
-                        <h3>Introduction to SQL</h3>
-                        <div class="certification-issuer">DataCamp</div>
-                        <ul class="certification-details">
-                            <li>Issued: Jan 2025</li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
-            
-            <!-- Row 3 - 2 certificates -->
-            <div class="certifications-row">
-                <!-- Certification 7 -->
-                <div class="certification-card animate fade-in delay-2">
-                    <div class="certification-image">
-                        <img src="new-folder/Certificate/Intermediate_SQL_certificate.jpg" alt="Intermediate SQL Certificate">
-                    </div>
-                    <div class="certification-content">
-                        <h3>Intermediate SQL</h3>
-                        <div class="certification-issuer">DataCamp</div>
-                        <ul class="certification-details">
-                            <li>Issued: Jan 2025</li>
-                        </ul>
-                    </div>
-                </div>
-
-                <!-- Certification 8 -->
-                <div class="certification-card animate fade-in delay-3">
-                    <div class="certification-image">
-                        <img src="new-folder/Certificate/Joining Data in SQL_certificate.jpg" alt="Joining Data in SQL Certificate">
-                    </div>
-                    <div class="certification-content">
-                        <h3>Joining Data in SQL</h3>
-                        <div class="certification-issuer">DataCamp</div>
-                        <ul class="certification-details">
-                           <li>Issued: Feb 2025</li>
-                        </ul>
-                    </div>
-                </div>
-
-                 <div class="certification-card animate fade-in delay-3">
-                    <div class="certification-image">
-                        <img src="new-folder/Certificate/certificate-of-completion-for-15-database-level-1-sql-concepts-and-practice.jpg" alt="Joining Data in SQL Certificate">
-                    </div>
-                    <div class="certification-content">
-                        <h3>Database Level 1 - SQL</h3>
-                        <div class="certification-issuer">Programming Advices</div>
-                        <ul class="certification-details">
-                           <li>Issued: Nov 2024</li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
-        </div>
-        
-        <!-- View All Certificates Button -->
-        <div class="view-all-certificates animate fade-in delay-4">
-            <a href="https://drive.google.com/drive/folders/1kaEkd6VMlei5J9nx1C3BprAGJ8yYnH3F?usp=drive_link" target="_blank" class="btn">
-                <i class="fas fa-certificate"></i> View All Certificates
-            </a>
-        </div>
-    </div>
-</section>
-
-<!-- Achievements Section -->
-<section class="section" id="achievements">
-    <div class="container">
-        <div class="section-title">
-            <h2>Achievements</h2>
-        </div>
-        <div class="achievements-container">
-            <!-- Row 1 - 3 achievements -->
-            <div class="achievements-row">
-                <!-- Achievement 1 -->
-                <div class="achievement-card animate fade-in">
-                    <div class="achievement-icon bronze">
-                        <i class="fas fa-trophy"></i>
-                    </div>
-                    <div class="achievement-content">
-                        <h3>3rd Place Winner in the Best Graduation Project competition</h3>
-                        <div class="achievement-issuer">DEPI & E-Youth</div>
-                        <ul class="achievement-details">
-                            <li>Selected among top finalists under the Ministry of Communications DEPI program.</li>
-                            <li>Delivered a data analysis project with measurable real-world impact.</li>
-                            <li>Recognized for excellence in advanced dashboard development and actionable insights.</li>
-                        </ul>
-                    </div>
-                </div>
-                
-             
-            </div>
-        </div>
-    </div>
-</section>
-
-                  <!-- Contact Section -->
-        <section class="section" id="contact">
-            <div class="container">
-                <div class="section-title">
-                    <h2>Contact Me</h2>
-                </div>
-                <div class="contact-container">
-                    <div class="contact-info animate fade-in">
-                        <h3>Let's work together</h3>
-                        <p>Have a project, idea, or just want to connect? Feel free to reach out!</p>
-                        <div class="contact-details">
-                            <div class="contact-item">
-                                <div class="contact-icon"><i class="fas fa-envelope"></i></div>
-                                <div class="contact-text">
-                                    <h4>Email</h4>
-                                    <a href="mailto:omarhamdi328@gmail.com">omarhamdi328@gmail.com</a>
-                                </div>
-                            </div>
-                            <div class="contact-item">
-                                <div class="contact-icon"><i class="fas fa-phone"></i></div>
-                                <div class="contact-text">
-                                    <h4>Phone</h4>
-                                    <p>+20 111 893 8276</p>
-                                </div>
-                            </div>
-                            <div class="contact-item">
-                                <div class="contact-icon"><i class="fab fa-linkedin-in"></i></div>
-                                <div class="contact-text">
-                                    <h4>LinkedIn</h4>
-                                    <a href="https://linkedin.com/in/omarhamdy3">linkedin.com/in/omarhamdy3</a>
-                                </div>
-                            </div>
-
-                            <div class="contact-item">
-                                <div class="contact-icon"><i class="fab fa-whatsapp"></i></div>
-                                <div class="contact-text">
-                                    <h4>WhatsApp</h4>
-                                    <a href="https://wa.me/201118938276" target="_blank">+20 111 893 8276</a>
-                                </div>
-                            </div>
-                            
+                    <div class="project-content">
+                        <h3>Superstore Business Performance Analysis</h3>
+                        <p>Analyzed sales data from 2014–2017 to identify trends, underperforming segments, and high-profit regions.</p>
+                        <div class="project-tools">
+                            <div class="project-tool">Python</div>
+                            <div class="project-tool">Tableau</div>
+                            <div class="project-tool">SQL</div>
+                            <div class="project-tool">Draw.io</div>
+                            <div class="project-tool">Figma</div>
+                            <div class="project-tool">Pandas</div>
+                        </div>
+                        <div class="project-links">
+                            <a href="#" class="project-details-btn" data-modal="superstore-modal"><i class="fas fa-external-link-alt"></i> Project Details</a>
+                            <a href="#"><i class="fab fa-github"></i> View Code</a>
                         </div>
                     </div>
-                    <div class="contact-form animate fade-in delay-1">
-                        <form action="mailto:omarhamdi328@gmail.com" method="POST" enctype="text/plain">
-                            <div class="form-group">
-                                <label for="name">Your Name</label>
-                                <input type="text" id="name" name="name" required>
-                            </div>
-                            <div class="form-group">
-                                <label for="email">Your Email</label>
-                                <input type="email" id="email" name="email" required>
-                            </div>
-                            <div class="form-group">
-                                <label for="message">Your Message</label>
-                                <textarea id="message" name="message" required></textarea>
-                            </div>
-                            <button type="submit" class="btn"><i class="fas fa-paper-plane"></i> Send Message</button>
-                        </form>
+                </div>
+
+                <div class="project-card animate fade-in delay-1">
+                    <div class="project-image">
+                        <img src="new-folder/Road Accident/Main Sheet.png" alt="Road Accident Dashboard 1">
+                    </div>
+                    <div class="project-content">
+                        <h3>Road Accident Analysis</h3>
+                        <p>Built Excel dashboards to explore accident data trends across locations, time, and causes for safety planning.</p>
+                        <div class="project-tools">
+                            <div class="project-tool">Excel</div>
+                            <div class="project-tool">Power Query</div>
+                            <div class="project-tool">Power Pivot</div>
+                            <div class="project-tool">Pivot Tables</div>
+                        </div>
+                        <div class="project-links">
+                            <a href="#" class="project-details-btn" data-modal="road-accident-modal"><i class="fas fa-external-link-alt"></i> Project Details</a>
+                            <a href="#"><i class="fab fa-github"></i> View Code</a>
+                        </div>
                     </div>
                 </div>
             </div>
-        </section>
-
-  <!-- Footer -->
-  <footer>
-    <div class="container footer-content">
-        <div class="footer-logo"><i class="fas fa-chart-line"></i>Omar<span>Hamdy</span></div>
-        <div class="footer-links">
-        <a href="#home">Home</a>
-        <a href="#about">About</a>
-        <a href="#experience">Experience</a>
-        <a href="#skills">Skills</a>
-        <a href="#projects">Projects</a>
-        <a href="#certifications">Certifications</a>
-        <a href="#achievements">Achievements</a>
-        <a href="#contact">Contact</a>
-    </div>
-        <div class="social-links-footer">
-            <a href="mailto:omarhamdi328@gmail.com"><i class="fas fa-envelope"></i></a>
-            <a href="tel:+201118938276"><i class="fas fa-phone"></i></a>
-            <a href="https://linkedin.com/in/omarhamdy3"><i class="fab fa-linkedin-in"></i></a>
-            <a href="https://github.com/OmarHamdy3"><i class="fab fa-github"></i></a>
         </div>
-        <p class="copyright">© 2025 Omar Hamdy. All rights reserved.</p>
-    </div>
-</footer>
+    </section>
 
-<!-- Enhanced Project Details Modals -->
-<!-- Superstore Modal -->
-<div id="superstore-modal" class="project-modal">
-    <div class="modal-content">
-        <button class="close-modal">&times;</button>
-        
-        <div class="modal-header">
-            <h2>Superstore Business Performance Analysis</h2>
-            <p class="modal-subtitle">Comprehensive analysis of sales data to drive business strategy</p>
+    <!-- Certifications Section -->
+    <section class="section" id="certifications">
+        <div class="container">
+            <div class="section-title">
+                <h2>Certifications</h2>
+            </div>
+            <div class="certifications-container">
+
+                <!-- Row 1 - 3 certificates -->
+                <div class="certifications-row">
+                    <!-- Certification 1 -->
+                    <div class="certification-card animate fade-in">
+                        <div class="certification-image">
+                            <img src="new-folder/Certificate/DEPI Certificate.jpg" alt="DEPI Certificate">
+                        </div>
+                        <div class="certification-content">
+                            <h3>Google Data Analyst Specialist</h3>
+                            <div class="certification-issuer">Digital Egypt Pioneers Initiative - DEPI</div>
+                            <ul class="certification-details">
+                                <li>Issued: Jul 2025</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <!-- Certification 2 -->
+                    <div class="certification-card animate fade-in delay-1">
+                        <div class="certification-image">
+                            <img src="new-folder/Certificate/Link Program.jpg" alt="Data Analysis Certificate">
+                        </div>
+                        <div class="certification-content">
+                            <h3>Business Intelligence & Data Analysis</h3>
+                            <div class="certification-issuer">E-Youth</div>
+                            <ul class="certification-details">
+                                <li>Issued: Jun 2025</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <!-- Certification 3 -->
+                    <div class="certification-card animate fade-in delay-2">
+                        <div class="certification-image">
+                            <img src="new-folder/Certificate/ITIDA + Gigs.jpg" alt="ITIDA + Gigs Certificate">
+                        </div>
+                        <div class="certification-content">
+                            <h3>ITIDA Gigs (Freelance Training Program)</h3>
+                            <div class="certification-issuer">ITIDA + Gigs</div>
+                            <ul class="certification-details">
+                                <li>Issued: Jul 2025</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Row 2 - 3 certificates -->
+                <div class="certifications-row">
+                    <!-- Certification 1 -->
+                    <div class="certification-card animate fade-in">
+                        <div class="certification-image">
+                            <img src="new-folder/Certificate/Data Analysis Using Power BI.jpg" alt="Data Analyst using Power BI Certificate">
+                        </div>
+                        <div class="certification-content">
+                            <h3>Data Analysis Using Power BI</h3>
+                            <div class="certification-issuer">E-Youth</div>
+                            <ul class="certification-details">
+                                <li>Issued: Apr 2025</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <!-- Certification 2 -->
+                    <div class="certification-card animate fade-in delay-1">
+                        <div class="certification-image">
+                            <img src="new-folder/Certificate/Data Analysis.jpg" alt="Data Analysis Certificate">
+                        </div>
+                        <div class="certification-content">
+                            <h3>Data Analysis</h3>
+                            <div class="certification-issuer">E-Youth</div>
+                            <ul class="certification-details">
+                                <li>Issued: Mar 2025</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <!-- Certification 3 -->
+                    <div class="certification-card animate fade-in delay-2">
+                        <div class="certification-image">
+                            <img src="new-folder/Certificate/Database Design.jpg" alt="Database Design Certificate">
+                        </div>
+                        <div class="certification-content">
+                            <h3>Database Design</h3>
+                            <div class="certification-issuer">E-Youth</div>
+                            <ul class="certification-details">
+                                <li>Issued: Feb 2025</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Row 3 - 3 certificates -->
+                <div class="certifications-row">
+                    <!-- Certification 4 -->
+                    <div class="certification-card animate fade-in delay-3">
+                        <div class="certification-image">
+                            <img src="new-folder/Certificate/Introduction to Tableau_certificate.jpg" alt="Introduction to Tableau Certificate">
+                        </div>
+                        <div class="certification-content">
+                            <h3>Introduction to Tableau</h3>
+                            <div class="certification-issuer">DataCamp</div>
+                            <ul class="certification-details">
+                                <li>Issued: Mar 2024</li>
+                            </ul>
+                        </div>
+                    </div>
+                    
+                    <!-- Certification 5 -->
+                    <div class="certification-card animate fade-in">
+                        <div class="certification-image">
+                            <img src="new-folder/Certificate/Analyzing Data In Tableau_certificate.jpg" alt="Analyzing Data in Tableau Certificate">
+                        </div>
+                        <div class="certification-content">
+                            <h3>Analyzing Data in Tableau</h3>
+                            <div class="certification-issuer">DataCamp</div>
+                            <ul class="certification-details">
+                                <li>Issued: Mar 2024</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <!-- Certification 6 -->
+                    <div class="certification-card animate fade-in delay-1">
+                        <div class="certification-image">
+                            <img src="new-folder/Certificate/Introduction To SQL_certificate.jpg" alt="Introduction to SQL Certificate">
+                        </div>
+                        <div class="certification-content">
+                            <h3>Introduction to SQL</h3>
+                            <div class="certification-issuer">DataCamp</div>
+                            <ul class="certification-details">
+                                <li>Issued: Jan 2025</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Row 4 - 3 certificates -->
+                <div class="certifications-row">
+                    <!-- Certification 7 -->
+                    <div class="certification-card animate fade-in delay-2">
+                        <div class="certification-image">
+                            <img src="new-folder/Certificate/Intermediate_SQL_certificate.jpg" alt="Intermediate SQL Certificate">
+                        </div>
+                        <div class="certification-content">
+                            <h3>Intermediate SQL</h3>
+                            <div class="certification-issuer">DataCamp</div>
+                            <ul class="certification-details">
+                                <li>Issued: Jan 2025</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <!-- Certification 8 -->
+                    <div class="certification-card animate fade-in delay-3">
+                        <div class="certification-image">
+                            <img src="new-folder/Certificate/Joining Data in SQL_certificate.jpg" alt="Joining Data in SQL Certificate">
+                        </div>
+                        <div class="certification-content">
+                            <h3>Joining Data in SQL</h3>
+                            <div class="certification-issuer">DataCamp</div>
+                            <ul class="certification-details">
+                                <li>Issued: Feb 2025</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div class="certification-card animate fade-in delay-3">
+                        <div class="certification-image">
+                            <img src="new-folder/Certificate/certificate-of-completion-for-15-database-level-1-sql-concepts-and-practice.jpg" alt="Joining Data in SQL Certificate">
+                        </div>
+                        <div class="certification-content">
+                            <h3>Database Level 1 - SQL</h3>
+                            <div class="certification-issuer">Programming Advices</div>
+                            <ul class="certification-details">
+                                <li>Issued: Nov 2024</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- View All Certificates Button -->
+            <div class="view-all-certificates animate fade-in delay-4">
+                <a href="https://drive.google.com/drive/folders/1kaEkd6VMlei5J9nx1C3BprAGJ8yYnH3F?usp=drive_link" target="_blank" class="btn">
+                    <i class="fas fa-certificate"></i> View All Certificates
+                </a>
+            </div>
         </div>
-        
-       
-        <div class="modal-section">
-            <h3>Project Demonstration</h3>
-            <div class="video-container">
-                <!-- Replace with your actual video embed code -->
-                <video controls preload="metadata" poster="cover.jpg">
+    </section>
+
+    <!-- Achievements Section -->
+    <section class="section" id="achievements">
+        <div class="container">
+            <div class="section-title">
+                <h2>Achievements</h2>
+            </div>
+            <div class="achievements-container">
+                <!-- Row 1 - 3 achievements -->
+                <div class="achievements-row">
+                    <!-- Achievement 1 -->
+                    <div class="achievement-card animate fade-in">
+                        <div class="achievement-icon bronze">
+                            <i class="fas fa-trophy"></i>
+                        </div>
+                        <div class="achievement-content">
+                            <h3>3rd Place Winner in the Best Graduation Project competition</h3>
+                            <div class="achievement-issuer">DEPI & E-Youth</div>
+                            <ul class="achievement-details">
+                                <li>Selected among top finalists under the Ministry of Communications DEPI program.</li>
+                                <li>Delivered a data analysis project with measurable real-world impact.</li>
+                                <li>Recognized for excellence in advanced dashboard development and actionable insights.</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section class="section" id="contact">
+        <div class="container">
+            <div class="section-title">
+                <h2>Contact Me</h2>
+            </div>
+            <div class="contact-container">
+                <div class="contact-info animate fade-in">
+                    <h3>Let's work together</h3>
+                    <p>Have a project, idea, or just want to connect? Feel free to reach out!</p>
+                    <div class="contact-details">
+                        <div class="contact-item">
+                            <div class="contact-icon"><i class="fas fa-envelope"></i></div>
+                            <div class="contact-text">
+                                <h4>Email</h4>
+                                <a href="mailto:omarhamdi328@gmail.com">omarhamdi328@gmail.com</a>
+                            </div>
+                        </div>
+                        <div class="contact-item">
+                            <div class="contact-icon"><i class="fas fa-phone"></i></div>
+                            <div class="contact-text">
+                                <h4>Phone</h4>
+                                <p>+20 111 893 8276</p>
+                            </div>
+                        </div>
+                        <div class="contact-item">
+                            <div class="contact-icon"><i class="fab fa-linkedin-in"></i></div>
+                            <div class="contact-text">
+                                <h4>LinkedIn</h4>
+                                <a href="https://linkedin.com/in/omarhamdy3">linkedin.com/in/omarhamdy3</a>
+                            </div>
+                        </div>
+
+                        <div class="contact-item">
+                            <div class="contact-icon"><i class="fab fa-whatsapp"></i></div>
+                            <div class="contact-text">
+                                <h4>WhatsApp</h4>
+                                <a href="https://wa.me/201118938276" target="_blank">+20 111 893 8276</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="contact-form animate fade-in delay-1">
+                    <form action="mailto:omarhamdi328@gmail.com" method="POST" enctype="text/plain">
+                        <div class="form-group">
+                            <label for="name">Your Name</label>
+                            <input type="text" id="name" name="name" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="email">Your Email</label>
+                            <input type="email" id="email" name="email" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="message">Your Message</label>
+                            <textarea id="message" name="message" required></textarea>
+                        </div>
+                        <button type="submit" class="btn"><i class="fas fa-paper-plane"></i> Send Message</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container footer-content">
+            <div class="footer-logo"><i class="fas fa-chart-line"></i>Omar<span>Hamdy</span></div>
+            <div class="footer-links">
+                <a href="#home">Home</a>
+                <a href="#about">About</a>
+                <a href="#experience">Experience</a>
+                <a href="#skills">Skills</a>
+                <a href="#projects">Projects</a>
+                <a href="#certifications">Certifications</a>
+                <a href="#achievements">Achievements</a>
+                <a href="#contact">Contact</a>
+            </div>
+            <div class="social-links-footer">
+                <a href="mailto:omarhamdi328@gmail.com"><i class="fas fa-envelope"></i></a>
+                <a href="tel:+201118938276"><i class="fas fa-phone"></i></a>
+                <a href="https://linkedin.com/in/omarhamdy3"><i class="fab fa-linkedin-in"></i></a>
+                <a href="https://github.com/OmarHamdy3"><i class="fab fa-github"></i></a>
+            </div>
+            <p class="copyright">© 2025 Omar Hamdy. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <!-- Enhanced Project Details Modals -->
+    <!-- Superstore Modal -->
+    <div id="superstore-modal" class="project-modal">
+        <div class="modal-content">
+            <button class="close-modal">&times;</button>
+            
+            <div class="modal-header">
+                <h2>Superstore Business Performance Analysis</h2>
+                <p class="modal-subtitle">Comprehensive analysis of sales data to drive business strategy</p>
+            </div>
+            
+            <!-- Video Section -->
+            <div class="modal-section">
+                <h3>Project Demonstration</h3>
+                <div class="video-container">
+                    <!-- Replace with your actual video embed code -->
+                     <video controls preload="metadata" poster="cover.jpg">
   <source src="km_20250424-1_1080p_30f_20250429_163107.mp4" type="video/mp4">
   Your browser does not support playing the video.
 </video>
@@ -2650,114 +3017,113 @@
                 <iframe src="km_20250424-1_1080p_30f_20250429_163107.mp4" frameborder="0" allow="accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
            -->
             </div>
-            <p>This video walkthrough demonstrates the interactive features of the Superstore dashboard and key findings from the analysis.</p>
-        </div>
-        
-        <!-- Dashboard Views Section -->
-        <div class="modal-section">
-            <h3>Dashboard Views</h3>
-            <div class="dashboard-images">
-                <div class="dashboard-image">
-                    <img src="new-folder/Superstore/Overview-Dashboard-Figma.png" alt="Superstore Overview Dashboard">
-                </div>
-                <div class="dashboard-image">
-                    <img src="new-folder/Superstore/OrderDetails-Dashboard.png" alt="Order Details Dashboard">
-                </div>
-                <div class="dashboard-image">
-                    <img src="new-folder/Superstore/Product-Dashboard-Figma.png" alt="Product Performance Dashboard">
-                </div>
-                <div class="dashboard-image">
-                    <img src="new-folder/Superstore/Customer-Dashboard-Figma.png" alt="Customer Segmentation Dashboard">
+                <p>This video walkthrough demonstrates the interactive features of the Superstore dashboard and key findings from the analysis.</p>
+            </div>
+            
+            <!-- Dashboard Views Section -->
+            <div class="modal-section">
+                <h3>Dashboard Views</h3>
+                <div class="dashboard-images">
+                    <div class="dashboard-image">
+                        <img src="new-folder/Superstore/Overview-Dashboard-Figma.png" alt="Superstore Overview Dashboard">
+                    </div>
+                    <div class="dashboard-image">
+                        <img src="new-folder/Superstore/OrderDetails-Dashboard.png" alt="Order Details Dashboard">
+                    </div>
+                    <div class="dashboard-image">
+                        <img src="new-folder/Superstore/Product-Dashboard-Figma.png" alt="Product Performance Dashboard">
+                    </div>
+                    <div class="dashboard-image">
+                        <img src="new-folder/Superstore/Customer-Dashboard-Figma.png" alt="Customer Segmentation Dashboard">
+                    </div>
                 </div>
             </div>
-        </div>
 
-        <!-- Project Description Section -->
-<div class="modal-section">
-    <h3>Project Description</h3>
-    <p>
-       The Superstore Business Performance Analysis project aims to uncover actionable insights into sales performance, profitability, 
-        and customer behavior across regions and product segments. The workflow began with data cleaning and preprocessing using 
-        SQL and Python (Pandas), followed by visual exploration with Plotly Express. Tableau was used to design an interactive 
-        dashboard based on a custom layout sketched in Draw.io and styled using Figma for visual consistency. The project was 
-        documented and planned in Notion for organized development. The final dashboard allows business stakeholders to monitor 
-        KPIs, identify underperforming areas, track seasonal trends, and make data-driven decisions that support growth and efficiency.
-    </p>
-</div>
-
-        
-        <!-- Project Steps Section -->
-        <div class="modal-section">
-            <h3>Project Steps</h3>
-            <ul>
-                <li><strong>Data Collection:</strong> Gathered 4 years of sales data from Superstore's database</li>
-                <li><strong>Data Cleaning:</strong> Addressed missing values, outliers, and inconsistencies using Python</li>
-                <li><strong>Exploratory Analysis:</strong> Identified initial patterns and correlations in the data</li>
-                <li><strong>Dashboard Design:</strong> Created wireframes in Figma for optimal user experience</li>
-                <li><strong>Visualization Development:</strong> Built interactive dashboards in Tableau</li>
-                <li><strong>Insight Generation:</strong> Derived actionable business recommendations</li>
-            </ul>
-        </div>
-        
-        <!-- Key Insights Section -->
-        <div class="modal-section">
-            <h3>Key Insights</h3>
-            <ul>
-                <li><strong>Category Performance:</strong> Technology category showed 15% quarter-over-quarter growth, while Furniture had lowest profit margins at 8%</li>
-                <li><strong>Regional Analysis:</strong> West region consistently outperformed others with 23% higher profit margins</li>
-                <li><strong>Customer Segmentation:</strong> Corporate clients accounted for 45% of total sales but only 35% of profits</li>
-                <li><strong>Seasonal Trends:</strong> Q4 sales were 40% higher than other quarters due to holiday season</li>
-                <li><strong>Shipping Analysis:</strong> Standard shipping had 15% higher customer satisfaction than express options</li>
-            </ul>
-        </div>
-        
-        <!-- Recommendations Section -->
-        <div class="modal-section">
-            <h3>Recommendations</h3>
-            <ul>
-                <li>Reallocate marketing budget to focus on high-growth Technology category in West region</li>
-                <li>Implement pricing strategy review for Furniture category to improve margins</li>
-                <li>Develop targeted promotions for Corporate clients to improve profitability</li>
-                <li>Expand inventory planning for Q4 peak season based on historical trends</li>
-                <li>Investigate reasons behind lower satisfaction with express shipping options</li>
-            </ul>
-        </div>
-        
-        <!-- Tools Used Section -->
-        <div class="modal-section">
-            <h3>Tools Used</h3>
-            <div class="modal-tools">
-                <div class="modal-tool"><i class="fab fa-python"></i> Python</div>
-                <div class="modal-tool"><i class="fas fa-chart-bar"></i> Tableau</div>
-                <div class="modal-tool"><i class="fas fa-database"></i> SQL</div>
-                <div class="modal-tool"><i class="fas fa-project-diagram"></i> Draw.io</div>
-                <div class="modal-tool"><i class="fab fa-figma"></i> Figma</div>
-                <div class="modal-tool"><i class="fas fa-table"></i> Pandas</div>
+            <!-- Project Description Section -->
+            <div class="modal-section">
+                <h3>Project Description</h3>
+                <p>
+                    The Superstore Business Performance Analysis project aims to uncover actionable insights into sales performance, profitability, 
+                    and customer behavior across regions and product segments. The workflow began with data cleaning and preprocessing using 
+                    SQL and Python (Pandas), followed by visual exploration with Plotly Express. Tableau was used to design an interactive 
+                    dashboard based on a custom layout sketched in Draw.io and styled using Figma for visual consistency. The project was 
+                    documented and planned in Notion for organized development. The final dashboard allows business stakeholders to monitor 
+                    KPIs, identify underperforming areas, track seasonal trends, and make data-driven decisions that support growth and efficiency.
+                </p>
             </div>
-        </div>
-        
-        <!-- Back Button -->
-        <div class="back-to-portfolio">
-            <button class="btn"><i class="fas fa-arrow-left"></i> Back To Portfolio</button>
+            
+            <!-- Project Steps Section -->
+            <div class="modal-section">
+                <h3>Project Steps</h3>
+                <ul>
+                    <li><strong>Data Collection:</strong> Gathered 4 years of sales data from Superstore's database</li>
+                    <li><strong>Data Cleaning:</strong> Addressed missing values, outliers, and inconsistencies using Python</li>
+                    <li><strong>Exploratory Analysis:</strong> Identified initial patterns and correlations in the data</li>
+                    <li><strong>Dashboard Design:</strong> Created wireframes in Figma for optimal user experience</li>
+                    <li><strong>Visualization Development:</strong> Built interactive dashboards in Tableau</li>
+                    <li><strong>Insight Generation:</strong> Derived actionable business recommendations</li>
+                </ul>
+            </div>
+            
+            <!-- Key Insights Section -->
+            <div class="modal-section">
+                <h3>Key Insights</h3>
+                <ul>
+                    <li><strong>Category Performance:</strong> Technology category showed 15% quarter-over-quarter growth, while Furniture had lowest profit margins at 8%</li>
+                    <li><strong>Regional Analysis:</strong> West region consistently outperformed others with 23% higher profit margins</li>
+                    <li><strong>Customer Segmentation:</strong> Corporate clients accounted for 45% of total sales but only 35% of profits</li>
+                    <li><strong>Seasonal Trends:</strong> Q4 sales were 40% higher than other quarters due to holiday season</li>
+                    <li><strong>Shipping Analysis:</strong> Standard shipping had 15% higher customer satisfaction than express options</li>
+                </ul>
+            </div>
+            
+            <!-- Recommendations Section -->
+            <div class="modal-section">
+                <h3>Recommendations</h3>
+                <ul>
+                    <li>Reallocate marketing budget to focus on high-growth Technology category in West region</li>
+                    <li>Implement pricing strategy review for Furniture category to improve margins</li>
+                    <li>Develop targeted promotions for Corporate clients to improve profitability</li>
+                    <li>Expand inventory planning for Q4 peak season based on historical trends</li>
+                    <li>Investigate reasons behind lower satisfaction with express shipping options</li>
+                </ul>
+            </div>
+            
+            <!-- Tools Used Section -->
+            <div class="modal-section">
+                <h3>Tools Used</h3>
+                <div class="modal-tools">
+                    <div class="modal-tool"><i class="fab fa-python"></i> Python</div>
+                    <div class="modal-tool"><i class="fas fa-chart-bar"></i> Tableau</div>
+                    <div class="modal-tool"><i class="fas fa-database"></i> SQL</div>
+                    <div class="modal-tool"><i class="fas fa-project-diagram"></i> Draw.io</div>
+                    <div class="modal-tool"><i class="fab fa-figma"></i> Figma</div>
+                    <div class="modal-tool"><i class="fas fa-table"></i> Pandas</div>
+                </div>
+            </div>
+            
+            <!-- Back Button -->
+            <div class="back-to-portfolio">
+                <button class="btn"><i class="fas fa-arrow-left"></i> Back To Portfolio</button>
+            </div>
         </div>
     </div>
-</div>
 
-<!-- Road Accident Modal -->
-<div id="road-accident-modal" class="project-modal">
-    <div class="modal-content">
-        <button class="close-modal">&times;</button>
-        
-        <div class="modal-header">
-            <h2>Road Accident Analysis</h2>
-            <p class="modal-subtitle">Interactive dashboards for transportation safety planning</p>
-        </div>
-        
-        <!-- Video Section -->
-        <div class="modal-section">
-            <h3>Project Demonstration</h3>
-            <div class="video-container">
-                <!-- Replace with your actual video embed code -->
+    <!-- Road Accident Modal -->
+    <div id="road-accident-modal" class="project-modal">
+        <div class="modal-content">
+            <button class="close-modal">&times;</button>
+            
+            <div class="modal-header">
+                <h2>Road Accident Analysis</h2>
+                <p class="modal-subtitle">Interactive dashboards for transportation safety planning</p>
+            </div>
+            
+            <!-- Video Section -->
+            <div class="modal-section">
+                <h3>Project Demonstration</h3>
+                <div class="video-container">
+                     <!-- Replace with your actual video embed code -->
 
                 <video controls preload="metadata" poster="cover.jpg">
   <source src="new-folder/Road Accident/Road_Accident_Analysis.mp4" type="video/mp4">
@@ -2767,107 +3133,135 @@
                 <iframe src="new-folder/Road Accident/Road_Accident_Analysis.mp4" frameborder="0" allow="accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
            -->
             </div>
-            <p>This video demonstrates the interactive features of the Road Accident dashboard and how to navigate between different views.</p>
-        </div>
-        
-        <!-- Dashboard Views Section -->
-        <div class="modal-section">
-            <h3>Dashboard Views</h3>
-            <div class="dashboard-images">
-                <div class="dashboard-image">
-                    <img src="new-folder/Road Accident/Main Sheet.png" alt="Main Dashboard">
-                </div>
-                <div class="dashboard-image">
-                    <img src="new-folder/Road Accident/Accident Analysis.png" alt="Accident Analysis Dashboard">
-                </div>
-                <div class="dashboard-image">
-                    <img src="new-folder/Road Accident/Driver Analysis.png" alt="Driver Analysis Dashboard">
-                </div>
-                <div class="dashboard-image">
-                    <img src="new-folder/Road Accident/Location Analysis.png" alt="Location Analysis Dashboard">
-                </div>
-                 <div class="dashboard-image">
-                    <img src="new-folder/Road Accident/Road Analysis.png" alt="Road Analysis Dashboard">
-                </div>
-                <div class="dashboard-image">
-                    <img src="new-folder/Road Accident/Time Analysis.png" alt="Time Analysis Dashboard">
-                </div>
-                <div class="dashboard-image">
-                    <img src="new-folder/Road Accident/Weather Analysis.png" alt="Weather Analysis Dashboard">
-                </div>
+                <p>This video demonstrates the interactive features of the Road Accident dashboard and how to navigate between different views.</p>
+            </div>
             
+            <!-- Dashboard Views Section -->
+            <div class="modal-section">
+                <h3>Dashboard Views</h3>
+                <div class="dashboard-images">
+                    <div class="dashboard-image">
+                        <img src="new-folder/Road Accident/Main Sheet.png" alt="Main Dashboard">
+                    </div>
+                    <div class="dashboard-image">
+                        <img src="new-folder/Road Accident/Accident Analysis.png" alt="Accident Analysis Dashboard">
+                    </div>
+                    <div class="dashboard-image">
+                        <img src="new-folder/Road Accident/Driver Analysis.png" alt="Driver Analysis Dashboard">
+                    </div>
+                    <div class="dashboard-image">
+                        <img src="new-folder/Road Accident/Location Analysis.png" alt="Location Analysis Dashboard">
+                    </div>
+                    <div class="dashboard-image">
+                        <img src="new-folder/Road Accident/Road Analysis.png" alt="Road Analysis Dashboard">
+                    </div>
+                    <div class="dashboard-image">
+                        <img src="new-folder/Road Accident/Time Analysis.png" alt="Time Analysis Dashboard">
+                    </div>
+                    <div class="dashboard-image">
+                        <img src="new-folder/Road Accident/Weather Analysis.png" alt="Weather Analysis Dashboard">
+                    </div>
+                </div>
             </div>
-        </div>
 
-        <!-- Project Description Section -->
-<div class="modal-section">
-    <h3>Project Description</h3>
-    <p>
-        This project analyzes road accident data to uncover trends and patterns that contribute to transportation safety planning. 
-        Using Excel, Power Query, Power Pivot, and Pivot Tables, I developed an interactive dashboard that breaks down accident data 
-        by time, location, weather, road conditions, and driver characteristics. The goal was to provide a dynamic reporting tool for 
-        decision-makers to understand accident hotspots and identify high-risk factors. Key insights such as peak accident times, 
-        urban vs. rural accident rates, and the impact of weather were highlighted to support actionable safety recommendations.
-    </p>
-</div>
-        
-        <!-- Project Steps Section -->
-        <div class="modal-section">
-            <h3>Project Steps</h3>
-            <ul>
-                <li><strong>Data Collection:</strong> Compiled accident reports from national transportation database</li>
-                <li><strong>Data Transformation:</strong> Used Power Query to clean and reshape raw data</li>
-                <li><strong>Data Modeling:</strong> Created relationships between tables using Power Pivot</li>
-                <li><strong>KPI Definition:</strong> Established key metrics for accident severity and frequency</li>
-                <li><strong>Dashboard Development:</strong> Built interactive views with slicers for user exploration</li>
-                <li><strong>Validation:</strong> Cross-checked findings with official statistics for accuracy</li>
-            </ul>
-        </div>
-        
-        <!-- Key Insights Section -->
-        <div class="modal-section">
-            <h3>Key Insights</h3>
-            <ul>
-                <li><strong>Temporal Patterns:</strong> Friday evenings (6-9pm) showed 28% higher accident rates</li>
-                <li><strong>Location Analysis:</strong> Urban areas accounted for 65% of accidents despite better infrastructure</li>
-                <li><strong>Weather Impact:</strong> Weather-related accidents peaked during winter months (Nov-Feb)</li>
-                <li><strong>Vehicle Types:</strong> Motorcycles involved in 40% of fatal accidents despite being 15% of vehicles</li>
-                <li><strong>Road Conditions:</strong> Wet surfaces contributed to 35% more severe accidents than dry conditions</li>
-            </ul>
-        </div>
-        
-        <!-- Recommendations Section -->
-        <div class="modal-section">
-            <h3>Recommendations</h3>
-            <ul>
-                <li>Increase police patrols during high-risk Friday evening hours</li>
-                <li>Implement targeted urban safety campaigns focusing on pedestrian crossings</li>
-                <li>Develop winter weather preparedness program for drivers</li>
-                <li>Create motorcycle safety initiative with mandatory training components</li>
-                <li>Improve drainage systems on roads with frequent wet surface accidents</li>
-            </ul>
-        </div>
-        
-        <!-- Tools Used Section -->
-        <div class="modal-section">
-            <h3>Tools Used</h3>
-            <div class="modal-tools">
-                <div class="modal-tool"><i class="fas fa-file-excel"></i> Excel</div>
-                <div class="modal-tool"><i class="fas fa-random"></i> Power Query</div>
-                <div class="modal-tool"><i class="fas fa-project-diagram"></i> Power Pivot</div>
-                <div class="modal-tool"><i class="fas fa-table"></i> Pivot Tables</div>
-                <div class="modal-tool"><i class="fas fa-map-marked-alt"></i> Geographic Analysis</div>
+            <!-- Project Description Section -->
+            <div class="modal-section">
+                <h3>Project Description</h3>
+                <p>
+                    This project analyzes road accident data to uncover trends and patterns that contribute to transportation safety planning. 
+                    Using Excel, Power Query, Power Pivot, and Pivot Tables, I developed an interactive dashboard that breaks down accident data 
+                    by time, location, weather, road conditions, and driver characteristics. The goal was to provide a dynamic reporting tool for 
+                    decision-makers to understand accident hotspots and identify high-risk factors. Key insights such as peak accident times, 
+                    urban vs. rural accident rates, and the impact of weather were highlighted to support actionable safety recommendations.
+                </p>
             </div>
-        </div>
-        
-        <!-- Back Button -->
-        <div class="back-to-portfolio">
-            <button class="btn"><i class="fas fa-arrow-left"></i> Back To Portfolio</button>
+            
+            <!-- Project Steps Section -->
+            <div class="modal-section">
+                <h3>Project Steps</h3>
+                <ul>
+                    <li><strong>Data Collection:</strong> Compiled accident reports from national transportation database</li>
+                    <li><strong>Data Transformation:</strong> Used Power Query to clean and reshape raw data</li>
+                    <li><strong>Data Modeling:</strong> Created relationships between tables using Power Pivot</li>
+                    <li><strong>KPI Definition:</strong> Established key metrics for accident severity and frequency</li>
+                    <li><strong>Dashboard Development:</strong> Built interactive views with slicers for user exploration</li>
+                    <li><strong>Validation:</strong> Cross-checked findings with official statistics for accuracy</li>
+                </ul>
+            </div>
+            
+            <!-- Key Insights Section -->
+            <div class="modal-section">
+                <h3>Key Insights</h3>
+                <ul>
+                    <li><strong>Temporal Patterns:</strong> Friday evenings (6-9pm) showed 28% higher accident rates</li>
+                    <li><strong>Location Analysis:</strong> Urban areas accounted for 65% of accidents despite better infrastructure</li>
+                    <li><strong>Weather Impact:</strong> Weather-related accidents peaked during winter months (Nov-Feb)</li>
+                    <li><strong>Vehicle Types:</strong> Motorcycles involved in 40% of fatal accidents despite being 15% of vehicles</li>
+                    <li><strong>Road Conditions:</strong> Wet surfaces contributed to 35% more severe accidents than dry conditions</li>
+                </ul>
+            </div>
+            
+            <!-- Recommendations Section -->
+            <div class="modal-section">
+                <h3>Recommendations</h3>
+                <ul>
+                    <li>Increase police patrols during high-risk Friday evening hours</li>
+                    <li>Implement targeted urban safety campaigns focusing on pedestrian crossings</li>
+                    <li>Develop winter weather preparedness program for drivers</li>
+                    <li>Create motorcycle safety initiative with mandatory training components</li>
+                    <li>Improve drainage systems on roads with frequent wet surface accidents</li>
+                </ul>
+            </div>
+            
+            <!-- Tools Used Section -->
+            <div class="modal-section">
+                <h3>Tools Used</h3>
+                <div class="modal-tools">
+                    <div class="modal-tool"><i class="fas fa-file-excel"></i> Excel</div>
+                    <div class="modal-tool"><i class="fas fa-random"></i> Power Query</div>
+                    <div class="modal-tool"><i class="fas fa-project-diagram"></i> Power Pivot</div>
+                    <div class="modal-tool"><i class="fas fa-table"></i> Pivot Tables</div>
+                    <div class="modal-tool"><i class="fas fa-map-marked-alt"></i> Geographic Analysis</div>
+                </div>
+            </div>
+            
+            <!-- Back Button -->
+            <div class="back-to-portfolio">
+                <button class="btn"><i class="fas fa-arrow-left"></i> Back To Portfolio</button>
+            </div>
         </div>
     </div>
-</div>
 
- <script>
+    <script>
+        // Theme toggle functionality
+        const themeToggle = document.getElementById('themeToggle');
+        const themeIcon = document.getElementById('themeIcon');
+        const body = document.body;
+        
+        // Check for saved theme or default to dark
+        const savedTheme = localStorage.getItem('portfolio-theme') || 'dark';
+        body.setAttribute('data-theme', savedTheme);
+        updateThemeIcon(savedTheme);
+        
+        // Toggle theme
+        themeToggle.addEventListener('click', () => {
+            const currentTheme = body.getAttribute('data-theme');
+            const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
+            
+            body.setAttribute('data-theme', newTheme);
+            localStorage.setItem('portfolio-theme', newTheme);
+            updateThemeIcon(newTheme);
+        });
+        
+        // Update theme icon
+        function updateThemeIcon(theme) {
+            if (theme === 'dark') {
+                themeIcon.className = 'fas fa-moon';
+            } else {
+                themeIcon.className = 'fas fa-sun';
+            }
+        }
+        
         // Mobile sidebar functionality
         const hamburger = document.getElementById('hamburger');
         const sidebar = document.getElementById('mobileSidebar');
@@ -2875,19 +3269,35 @@
         const closeSidebarBtn = document.getElementById('close-sidebar');
         const sidebarLinks = document.querySelectorAll('.sidebar-link');
         const navLinks = document.querySelectorAll('.nav-link');
+        const menuIcon = document.getElementById('menu-icon');
+        const closeIcon = document.getElementById('close-icon');
 
         // Toggle sidebar
         hamburger.addEventListener('click', () => {
+            const isActive = sidebar.classList.contains('active');
+            if (isActive) {
+                closeSidebar();
+            } else {
+                openSidebar();
+            }
+        });
+
+        // Open sidebar
+        function openSidebar() {
             sidebar.classList.add('active');
             overlay.classList.add('active');
             document.body.style.overflow = 'hidden';
-        });
+            menuIcon.style.display = 'none';
+            closeIcon.style.display = 'block';
+        }
 
         // Close sidebar
         function closeSidebar() {
             sidebar.classList.remove('active');
             overlay.classList.remove('active');
             document.body.style.overflow = 'auto';
+            menuIcon.style.display = 'block';
+            closeIcon.style.display = 'none';
         }
 
         // Close sidebar when clicking overlay or close button
